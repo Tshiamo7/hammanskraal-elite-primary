@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions - Hammanskraal Elite School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    :root {
+      --navy: #1a2744;
+      --red: #c41e3a;
+      --gold: #B8860B;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 16px 0;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    .logo-text span:first-child {
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      display: block;
+      line-height: 1.1;
+    }
+    .logo-text span:last-child {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 1px solid white;
+      color: white;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-red {
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 24px 80px;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 18px;
+      color: #d1d5db;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .breadcrumb {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .breadcrumb a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 100px 24px;
+    }
+    .section-light {
+      background: white;
+    }
+    .section-gray {
+      background: #fafafa;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    /* Process Steps */
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+    .process-step::after {
+      content: '→';
+      position: absolute;
+      right: -20px;
+      top: 40px;
+      color: var(--gold);
+      font-size: 24px;
+    }
+    .process-step:last-child::after {
+      display: none;
+    }
+    .process-number {
+      width: 80px;
+      height: 80px;
+      background: var(--red);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 32px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+    }
+    .process-step h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .process-step p {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Requirements */
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+    .requirements-card {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .requirements-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 24px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--gold);
+    }
+    .requirements-list {
+      list-style: none;
+    }
+    .requirements-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #4b5563;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .requirements-list li::before {
+      content: '📋';
+      flex-shrink: 0;
+    }
+
+    /* Fees */
+    .fees-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .fee-card {
+      background: white;
+      border: 2px solid #e5e7eb;
+      text-align: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .fee-card:hover {
+      border-color: var(--red);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+    .fee-card.featured {
+      border-color: var(--red);
+      position: relative;
+    }
+    .fee-card.featured::before {
+      content: 'Most Popular';
+      position: absolute;
+      top: 20px;
+      right: -35px;
+      background: var(--red);
+      color: white;
+      padding: 4px 40px;
+      font-size: 10px;
+      text-transform: uppercase;
+      transform: rotate(45deg);
+    }
+    .fee-header {
+      background: var(--navy);
+      padding: 32px;
+    }
+    .fee-card.featured .fee-header {
+      background: var(--red);
+    }
+    .fee-header h3 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .fee-header span {
+      color: var(--gold);
+      font-size: 12px;
+    }
+    .fee-card.featured .fee-header span {
+      color: rgba(255,255,255,0.8);
+    }
+    .fee-price {
+      padding: 32px;
+      background: #fafafa;
+    }
+    .fee-price h4 {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+    }
+    .fee-price h4 span {
+      font-size: 18px;
+      color: #6b7280;
+    }
+    .fee-price p {
+      color: #6b7280;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    .fee-features {
+      padding: 32px;
+      list-style: none;
+      text-align: left;
+    }
+    .fee-features li {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #4b5563;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .fee-features li::before {
+      content: '✓';
+      color: var(--red);
+      font-weight: bold;
+    }
+    .fee-btn {
+      display: block;
+      margin: 0 32px 32px;
+      padding: 16px;
+      background: var(--navy);
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.1em;
+      transition: background 0.3s ease;
+    }
+    .fee-btn:hover {
+      background: var(--red);
+    }
+
+    /* Application Form */
+    .form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 48px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 24px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: var(--navy);
+      font-size: 14px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #e5e7eb;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--red);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-submit {
+      background: var(--red);
+      color: white;
+      padding: 16px 48px;
+      border: none;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    .form-submit:hover {
+      background: #a01830;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 24px 0;
+    }
+    .faq-question {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 18px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .faq-question::before {
+      content: 'Q';
+      width: 32px;
+      height: 32px;
+      background: var(--red);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .faq-answer {
+      color: #6b7280;
+      line-height: 1.7;
+      padding-left: 44px;
+    }
+
+    /* Contact CTA */
+    .contact-cta {
+      background: var(--navy);
+      padding: 80px 24px;
+    }
+    .contact-cta-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .contact-cta h2 {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .contact-cta p {
+      color: #9ca3af;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .contact-info-item span:first-child {
+      width: 48px;
+      height: 48px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      color: white;
+      padding: 80px 24px 48px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-logo-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+    .footer-desc {
+      color: #9ca3af;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .footer h4 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="preview.html" class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+        <div class="logo-text">
+          <span>Hammanskraal Elite</span>
+          <span>We Are Special</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="preview.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html" class="active">Admissions</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-buttons">
+        <a href="contact.html" class="btn-outline">Contact Us</a>
+        <a href="admissions.html" class="btn-red">Enrol Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Admissions</h1>
+    <p>Join our school family! Learn about our admission process, requirements, and fees.</p>
+    <div class="breadcrumb">
+      <a href="preview.html">Home</a> / Admissions
+    </div>
+  </header>
+
+  <!-- Admission Process -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">How to Apply</p>
+        <h2 class="section-title">Admission Process</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-number">1</div>
+          <h4>Enquiry</h4>
+          <p>Contact us or fill out the enquiry form to learn more about our school.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">2</div>
+          <h4>School Visit</h4>
+          <p>Schedule a visit to tour our campus and meet our dedicated staff.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">3</div>
+          <h4>Submit Documents</h4>
+          <p>Complete the application form and submit required documents.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-number">4</div>
+          <h4>Enrolment</h4>
+          <p>Receive acceptance and complete the enrolment process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Requirements -->
+  <section class="section section-gray">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">What You Need</p>
+        <h2 class="section-title">Admission Requirements</h2>
+      </div>
+      <div class="requirements-grid">
+        <div class="requirements-card">
+          <h3>Required Documents</h3>
+          <ul class="requirements-list">
+            <li>Certified copy of learner's birth certificate</li>
+            <li>Certified copy of parent/guardian ID</li>
+            <li>Proof of residence (utility bill or lease agreement)</li>
+            <li>Previous school reports (if applicable)</li>
+            <li>Transfer card from previous school (if applicable)</li>
+            <li>Immunization records</li>
+            <li>Two recent passport-size photos</li>
+          </ul>
+        </div>
+        <div class="requirements-card">
+          <h3>Age Requirements</h3>
+          <ul class="requirements-list">
+            <li>Grade R: Turning 5 by 30 June of the year of admission</li>
+            <li>Grade 1: Turning 6 by 30 June of the year of admission</li>
+            <li>Grade 2-7: Age-appropriate placement based on previous schooling</li>
+            <li>Assessment may be required for placement</li>
+            <li>Late applications considered based on availability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- School Fees -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Investment in Education</p>
+        <h2 class="section-title">School Fees 2024</h2>
+      </div>
+      <div class="fees-grid">
+        <div class="fee-card">
+          <div class="fee-header">
+            <h3>Foundation Phase</h3>
+            <span>Grade R - Grade 3</span>
+          </div>
+          <div class="fee-price">
+            <h4>R850 <span>/month</span></h4>
+            <p>or R8,500 annually</p>
+          </div>
+          <ul class="fee-features">
+            <li>Full CAPS curriculum</li>
+            <li>Learning materials included</li>
+            <li>Extra-curricular activities</li>
+            <li>Progress reports</li>
+          </ul>
+          <a href="#apply" class="fee-btn">Apply Now</a>
+        </div>
+        <div class="fee-card featured">
+          <div class="fee-header">
+            <h3>Intermediate Phase</h3>
+            <span>Grade 4 - Grade 6</span>
+          </div>
+          <div class="fee-price">
+            <h4>R950 <span>/month</span></h4>
+            <p>or R9,500 annually</p>
+          </div>
+          <ul class="fee-features">
+            <li>Full CAPS curriculum</li>
+            <li>Learning materials included</li>
+            <li>Computer literacy</li>
+            <li>Extra-curricular activities</li>
+            <li>Progress reports</li>
+          </ul>
+          <a href="#apply" class="fee-btn">Apply Now</a>
+        </div>
+        <div class="fee-card">
+          <div class="fee-header">
+            <h3>Senior Phase</h3>
+            <span>Grade 7</span>
+          </div>
+          <div class="fee-price">
+            <h4>R1,050 <span>/month</span></h4>
+            <p>or R10,500 annually</p>
+          </div>
+          <ul class="fee-features">
+            <li>Full CAPS curriculum</li>
+            <li>Learning materials included</li>
+            <li>Computer literacy</li>
+            <li>High school preparation</li>
+            <li>Career guidance</li>
+            <li>Extra-curricular activities</li>
+          </ul>
+          <a href="#apply" class="fee-btn">Apply Now</a>
+        </div>
+      </div>
+      <p style="text-align: center; color: #6b7280; margin-top: 32px; font-size: 14px;">
+        * Registration fee of R500 applies to all new admissions. Payment plans available upon request.
+      </p>
+    </div>
+  </section>
+
+  <!-- Application Form -->
+  <section class="section section-gray" id="apply">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Start Your Journey</p>
+        <h2 class="section-title">Application Form</h2>
+      </div>
+      <div class="form-container">
+        <form>
+          <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 24px;">Learner Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Date of Birth *</label>
+              <input type="date" required>
+            </div>
+            <div class="form-group">
+              <label>Grade Applying For *</label>
+              <select required>
+                <option value="">Select Grade</option>
+                <option value="R">Grade R</option>
+                <option value="1">Grade 1</option>
+                <option value="2">Grade 2</option>
+                <option value="3">Grade 3</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); margin: 40px 0 24px;">Parent/Guardian Information</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Parent/Guardian Name *</label>
+              <input type="text" required>
+            </div>
+            <div class="form-group">
+              <label>Relationship to Learner *</label>
+              <select required>
+                <option value="">Select Relationship</option>
+                <option value="mother">Mother</option>
+                <option value="father">Father</option>
+                <option value="guardian">Legal Guardian</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Home Address *</label>
+            <textarea required placeholder="Street address, suburb, city, postal code"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Additional Information</label>
+            <textarea placeholder="Any additional information you'd like to share (special needs, previous schooling, etc.)"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Submit Application</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Questions?</p>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <h4 class="faq-question">When does the school year start?</h4>
+          <p class="faq-answer">Our school year follows the national school calendar, typically starting in mid-January and ending in early December. We have four terms with school holidays in between.</p>
+        </div>
+        <div class="faq-item">
+          <h4 class="faq-question">What are the school hours?</h4>
+          <p class="faq-answer">School hours are from 7:30 AM to 2:30 PM, Monday to Friday. The school office is open from 7:00 AM to 4:00 PM for enquiries and administrative matters.</p>
+        </div>
+        <div class="faq-item">
+          <h4 class="faq-question">Do you offer after-care services?</h4>
+          <p class="faq-answer">Yes, we offer after-care services until 5:00 PM for an additional fee. This includes supervised homework time, snacks, and recreational activities.</p>
+        </div>
+        <div class="faq-item">
+          <h4 class="faq-question">What is your learner-to-teacher ratio?</h4>
+          <p class="faq-answer">We maintain small class sizes with a maximum of 35 learners per class, ensuring each child receives adequate attention and support from our teachers.</p>
+        </div>
+        <div class="faq-item">
+          <h4 class="faq-question">Is there a school uniform?</h4>
+          <p class="faq-answer">Yes, all learners are required to wear the official school uniform. Details about the uniform and where to purchase it will be provided upon admission.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="contact-cta">
+    <div class="contact-cta-inner">
+      <div>
+        <h2>Need More Information?</h2>
+        <p>Our admissions team is here to help you through the process. Contact us for any questions or to schedule a school visit.</p>
+        <div class="contact-info-item">
+          <span>📞</span>
+          <span>+27 (12) 000 0000</span>
+        </div>
+        <div class="contact-info-item">
+          <span>✉️</span>
+          <span>admissions@hammanskraalelite.co.za</span>
+        </div>
+        <div class="contact-info-item">
+          <span>📍</span>
+          <span>Hammanskraal, Gauteng, South Africa</span>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <img src="graduation-girls.jpg" alt="Happy Students" style="width: 100%; max-width: 400px; height: 300px; object-fit: cover;">
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="logo.png" alt="Logo" class="footer-logo-img">
+            <div class="logo-text">
+              <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
+              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+            </div>
+          </div>
+          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="admissions.html">Admissions</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul class="footer-links">
+            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
+            <li><a href="#">📞 +27 (12) 000 0000</a></li>
+            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>School Hours</h4>
+          <ul class="footer-links">
+            <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
+            <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
+            <li><a href="#">Sat - Sun: Closed</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <div>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

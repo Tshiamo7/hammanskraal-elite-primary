@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Academics - Hammanskraal Elite School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    :root {
+      --navy: #1a2744;
+      --red: #c41e3a;
+      --gold: #B8860B;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 16px 0;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    .logo-text span:first-child {
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      display: block;
+      line-height: 1.1;
+    }
+    .logo-text span:last-child {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 1px solid white;
+      color: white;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-red {
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 24px 80px;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header h1 {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 18px;
+      color: #d1d5db;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .breadcrumb {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .breadcrumb a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 100px 24px;
+    }
+    .section-light {
+      background: white;
+    }
+    .section-gray {
+      background: #fafafa;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    /* Curriculum Overview */
+    .curriculum-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .curriculum-intro p {
+      color: #6b7280;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .curriculum-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    /* Grades */
+    .grades-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .grade-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .grade-card:hover {
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+    }
+    .grade-header {
+      background: var(--navy);
+      padding: 24px;
+      text-align: center;
+    }
+    .grade-header h3 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+    }
+    .grade-header span {
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .grade-content {
+      padding: 32px;
+    }
+    .grade-content p {
+      color: #6b7280;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .grade-subjects {
+      list-style: none;
+    }
+    .grade-subjects li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #4b5563;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .grade-subjects li::before {
+      content: '✓';
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    /* Subjects */
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .subject-card {
+      background: white;
+      padding: 32px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+    .subject-card:hover {
+      border-color: var(--red);
+    }
+    .subject-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--navy), #2a3a5a);
+      color: white;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 28px;
+    }
+    .subject-card h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+    .subject-card p {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Teaching Methods */
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .method-card {
+      display: flex;
+      gap: 24px;
+      padding: 32px;
+      background: white;
+      border-left: 4px solid var(--red);
+    }
+    .method-number {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .method-content h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--navy);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .method-content p {
+      color: #6b7280;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* Extra Activities */
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .activity-card {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+    }
+    .activity-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .activity-card:hover img {
+      transform: scale(1.05);
+    }
+    .activity-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,39,68,0.9), transparent);
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .activity-overlay h4 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: var(--red);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .cta-btn {
+      background: white;
+      color: var(--red);
+      padding: 16px 48px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      color: white;
+      padding: 80px 24px 48px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-logo-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+    .footer-desc {
+      color: #9ca3af;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .footer h4 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="preview.html" class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+        <div class="logo-text">
+          <span>Hammanskraal Elite</span>
+          <span>We Are Special</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="preview.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html" class="active">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-buttons">
+        <a href="contact.html" class="btn-outline">Contact Us</a>
+        <a href="admissions.html" class="btn-red">Enrol Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Academic Programme</h1>
+    <p>Discover our comprehensive curriculum designed to nurture young minds and prepare learners for future success.</p>
+    <div class="breadcrumb">
+      <a href="preview.html">Home</a> / Academics
+    </div>
+  </header>
+
+  <!-- Curriculum Overview -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div class="curriculum-intro">
+        <div>
+          <p class="section-tag">Our Approach</p>
+          <h2 class="section-title">A Curriculum Built for Excellence</h2>
+          <p>
+            At Hammanskraal Elite School, we follow the CAPS (Curriculum and Assessment Policy Statement) curriculum as prescribed by the Department of Basic Education. Our dedicated teachers bring this curriculum to life through engaging lessons, hands-on activities, and personalized attention.
+          </p>
+          <p>
+            We believe in developing the whole child – academically, socially, emotionally, and physically. Our balanced approach ensures that learners not only excel in their studies but also develop critical thinking skills, creativity, and a love for learning.
+          </p>
+          <p>
+            Small class sizes allow our teachers to provide individualized attention, ensuring that every learner receives the support they need to reach their full potential.
+          </p>
+        </div>
+        <div class="curriculum-image">
+          <img src="culture-art.jpg" alt="Students Learning">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grades -->
+  <section class="section section-gray">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Grade Levels</p>
+        <h2 class="section-title">Our Academic Phases</h2>
+      </div>
+      <div class="grades-grid">
+        <div class="grade-card">
+          <div class="grade-header">
+            <span>Foundation Phase</span>
+            <h3>Grade R - 3</h3>
+          </div>
+          <div class="grade-content">
+            <p>Building strong foundations in literacy and numeracy through play-based learning and structured activities.</p>
+            <ul class="grade-subjects">
+              <li>Home Language</li>
+              <li>First Additional Language</li>
+              <li>Mathematics</li>
+              <li>Life Skills</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grade-card">
+          <div class="grade-header">
+            <span>Intermediate Phase</span>
+            <h3>Grade 4 - 6</h3>
+          </div>
+          <div class="grade-content">
+            <p>Expanding knowledge and developing critical thinking skills across a broader range of subjects.</p>
+            <ul class="grade-subjects">
+              <li>Languages (Home & FAL)</li>
+              <li>Mathematics</li>
+              <li>Natural Sciences</li>
+              <li>Social Sciences</li>
+              <li>Technology</li>
+              <li>Life Skills</li>
+            </ul>
+          </div>
+        </div>
+        <div class="grade-card">
+          <div class="grade-header">
+            <span>Senior Phase</span>
+            <h3>Grade 7</h3>
+          </div>
+          <div class="grade-content">
+            <p>Preparing learners for high school with advanced academic skills and independent learning habits.</p>
+            <ul class="grade-subjects">
+              <li>Languages (Home & FAL)</li>
+              <li>Mathematics</li>
+              <li>Natural Sciences</li>
+              <li>Social Sciences</li>
+              <li>Technology</li>
+              <li>Economic Management Sciences</li>
+              <li>Life Orientation</li>
+              <li>Creative Arts</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subjects -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">What We Teach</p>
+        <h2 class="section-title">Core Subjects</h2>
+      </div>
+      <div class="subjects-grid">
+        <div class="subject-card">
+          <div class="subject-icon">📖</div>
+          <h4>Languages</h4>
+          <p>Developing strong reading, writing, and communication skills in Home Language and English.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">🔢</div>
+          <h4>Mathematics</h4>
+          <p>Building number sense, problem-solving abilities, and logical thinking skills.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">🔬</div>
+          <h4>Natural Sciences</h4>
+          <p>Exploring the natural world through inquiry-based learning and experiments.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">🌍</div>
+          <h4>Social Sciences</h4>
+          <p>Understanding history, geography, and our place in the world.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">💻</div>
+          <h4>Technology</h4>
+          <p>Developing digital literacy and problem-solving through technology.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">🎨</div>
+          <h4>Creative Arts</h4>
+          <p>Expressing creativity through visual arts, music, drama, and dance.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">❤️</div>
+          <h4>Life Skills</h4>
+          <p>Building personal, social, and emotional competencies for life.</p>
+        </div>
+        <div class="subject-card">
+          <div class="subject-icon">💰</div>
+          <h4>EMS</h4>
+          <p>Understanding economics, business, and financial literacy basics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaching Methods -->
+  <section class="section section-gray">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">How We Teach</p>
+        <h2 class="section-title">Our Teaching Approach</h2>
+      </div>
+      <div class="methods-grid">
+        <div class="method-card">
+          <div class="method-number">01</div>
+          <div class="method-content">
+            <h4>Interactive Learning</h4>
+            <p>We engage learners through hands-on activities, group discussions, and interactive lessons that make learning fun and memorable.</p>
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-number">02</div>
+          <div class="method-content">
+            <h4>Individual Attention</h4>
+            <p>Our small class sizes allow teachers to identify each learner's strengths and areas for growth, providing personalized support.</p>
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-number">03</div>
+          <div class="method-content">
+            <h4>Continuous Assessment</h4>
+            <p>Regular assessments help us track progress and ensure every learner is on the path to success.</p>
+          </div>
+        </div>
+        <div class="method-card">
+          <div class="method-number">04</div>
+          <div class="method-content">
+            <h4>Parent Partnership</h4>
+            <p>We keep parents informed and involved in their child's education through regular communication and meetings.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Extra Activities -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Beyond the Classroom</p>
+        <h2 class="section-title">Extra-Curricular Activities</h2>
+      </div>
+      <div class="activities-grid">
+        <div class="activity-card">
+          <img src="culture-sports.jpg" alt="Sports">
+          <div class="activity-overlay">
+            <h4>Sports & Athletics</h4>
+          </div>
+        </div>
+        <div class="activity-card">
+          <img src="culture-dance.jpg" alt="Cultural Dance">
+          <div class="activity-overlay">
+            <h4>Cultural Activities</h4>
+          </div>
+        </div>
+        <div class="activity-card">
+          <img src="cultural-celebration.jpg" alt="Music">
+          <div class="activity-overlay">
+            <h4>Music & Drama</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to Join Our School?</h2>
+    <p>Give your child the gift of quality education. Apply now for admission to Hammanskraal Elite School.</p>
+    <a href="admissions.html" class="cta-btn">Apply for Admission</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="logo.png" alt="Logo" class="footer-logo-img">
+            <div class="logo-text">
+              <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
+              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+            </div>
+          </div>
+          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="admissions.html">Admissions</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul class="footer-links">
+            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
+            <li><a href="#">📞 +27 (12) 000 0000</a></li>
+            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>School Hours</h4>
+          <ul class="footer-links">
+            <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
+            <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
+            <li><a href="#">Sat - Sun: Closed</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <div>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Hammanskraal Elite School</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    :root {
+      --navy: #1a2744;
+      --red: #c41e3a;
+      --gold: #B8860B;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 16px 0;
+      background: var(--navy);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    .logo-text span:first-child {
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      display: block;
+      line-height: 1.1;
+    }
+    .logo-text span:last-child {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-outline {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: 1px solid white;
+      color: white;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-red {
+      background: var(--red);
+      color: white;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* Page Header */
+    .page-header {
+      padding: 160px 24px 80px;
+      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: 48px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 18px;
+      color: #d1d5db;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .breadcrumb {
+      margin-top: 24px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .breadcrumb a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 100px 24px;
+    }
+    .section-light {
+      background: white;
+    }
+    .section-gray {
+      background: #fafafa;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-tag {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 12px 32px;
+      background: transparent;
+      border: 2px solid #e5e7eb;
+      color: #6b7280;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 250px;
+      transition: transform 0.5s ease;
+    }
+    .gallery-item.large img {
+      min-height: 516px;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,39,68,0.9), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: flex-end;
+      padding: 24px;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+    .gallery-overlay h4 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+    }
+    .gallery-overlay span {
+      color: var(--gold);
+      font-size: 12px;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Featured Section */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+    .featured-main {
+      position: relative;
+      height: 500px;
+      overflow: hidden;
+    }
+    .featured-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .featured-main-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 48px;
+      background: linear-gradient(to top, rgba(26,39,68,0.95), transparent);
+    }
+    .featured-main-overlay span {
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .featured-main-overlay h3 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      margin-top: 8px;
+    }
+    .featured-side {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .featured-side-item {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-side-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .featured-side-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(196,30,58,0.9), transparent);
+    }
+    .featured-side-overlay h4 {
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+    }
+
+    /* Video Section */
+    .video-section {
+      background: var(--navy);
+      padding: 100px 24px;
+      text-align: center;
+    }
+    .video-section h2 {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    .video-section p {
+      color: #9ca3af;
+      max-width: 600px;
+      margin: 0 auto 48px;
+    }
+    .video-placeholder {
+      max-width: 900px;
+      margin: 0 auto;
+      height: 500px;
+      background: #0a0f1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .video-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+    .play-button {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .play-button:hover {
+      transform: scale(1.1);
+    }
+    .play-button::after {
+      content: '▶';
+      color: white;
+      font-size: 32px;
+      margin-left: 8px;
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .testimonial-card {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      font-size: 80px;
+      font-family: 'Playfair Display', serif;
+      color: var(--red);
+      opacity: 0.2;
+      line-height: 1;
+    }
+    .testimonial-card p {
+      color: #6b7280;
+      line-height: 1.8;
+      margin-bottom: 24px;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .testimonial-avatar {
+      width: 50px;
+      height: 50px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+    }
+    .testimonial-author h5 {
+      color: var(--navy);
+      font-family: 'Playfair Display', serif;
+    }
+    .testimonial-author span {
+      color: #9ca3af;
+      font-size: 12px;
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--red);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      max-width: 600px;
+      margin: 0 auto 32px;
+    }
+    .cta-btn {
+      background: white;
+      color: var(--red);
+      padding: 16px 48px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      color: white;
+      padding: 80px 24px 48px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-logo-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+    .footer-desc {
+      color: #9ca3af;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .footer h4 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="preview.html" class="logo">
+        <img src="logo.png" alt="Logo" class="logo-img">
+        <div class="logo-text">
+          <span>Hammanskraal Elite</span>
+          <span>We Are Special</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="preview.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-buttons">
+        <a href="contact.html" class="btn-outline">Contact Us</a>
+        <a href="admissions.html" class="btn-red">Enrol Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <h1>Photo Gallery</h1>
+    <p>Explore moments of joy, learning, and celebration at Hammanskraal Elite School.</p>
+    <div class="breadcrumb">
+      <a href="preview.html">Home</a> / Gallery
+    </div>
+  </header>
+
+  <!-- Featured Gallery -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">Highlights</p>
+        <h2 class="section-title">Featured Moments</h2>
+      </div>
+      <div class="featured-grid">
+        <div class="featured-main">
+          <img src="hero-main.jpg" alt="School Event">
+          <div class="featured-main-overlay">
+            <span>School Events</span>
+            <h3>Career Day Celebration 2024</h3>
+          </div>
+        </div>
+        <div class="featured-side">
+          <div class="featured-side-item">
+            <img src="graduation-girls.jpg" alt="Graduation">
+            <div class="featured-side-overlay">
+              <h4>Grade R Graduation</h4>
+            </div>
+          </div>
+          <div class="featured-side-item">
+            <img src="culture-dance.jpg" alt="Cultural Day">
+            <div class="featured-side-overlay">
+              <h4>Heritage Day</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="section section-gray">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <p class="section-tag">Browse Our Photos</p>
+        <h2 class="section-title">School Life Gallery</h2>
+      </div>
+
+      <div class="filter-tabs">
+        <button class="filter-tab active">All Photos</button>
+        <button class="filter-tab">Events</button>
+        <button class="filter-tab">Cultural</button>
+        <button class="filter-tab">Sports</button>
+        <button class="filter-tab">Graduation</button>
+        <button class="filter-tab">Classroom</button>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item large">
+          <img src="cultural-celebration.jpg" alt="Cultural Celebration">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Cultural Celebration</h4>
+              <span>Heritage Day 2024</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="culture-dance.jpg" alt="Traditional Dance">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Traditional Dance</h4>
+              <span>Cultural Activities</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="culture-graduation.jpg" alt="Graduation">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Graduation Ceremony</h4>
+              <span>Class of 2024</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="culture-sports.jpg" alt="Sports Day">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Sports Day</h4>
+              <span>Athletics</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="graduation-girls.jpg" alt="Graduation Girls">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Our Graduates</h4>
+              <span>Moving to Grade 1</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item large">
+          <img src="hero-main.jpg" alt="Career Day">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Career Day</h4>
+              <span>Inspiring Future Leaders</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="school-event.jpg" alt="School Event">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Annual Event</h4>
+              <span>School Activities</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="students-team.jpg" alt="Students Team">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Team Building</h4>
+              <span>Student Activities</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="culture-art.jpg" alt="Art Class">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Creative Arts</h4>
+              <span>Classroom Activities</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <h2>Watch Our Story</h2>
+    <p>See what makes Hammanskraal Elite School special through the eyes of our learners, parents, and staff.</p>
+    <div class="video-placeholder">
+      <img src="cultural-celebration.jpg" alt="Video Thumbnail">
+      <div class="play-button"></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section-light">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <p class="section-tag">What Parents Say</p>
+        <h2 class="section-title">Testimonials</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p>The teachers at Hammanskraal Elite truly care about every child. My daughter has flourished both academically and socially since joining the school.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">TM</div>
+            <div>
+              <h5>Thabo Molefe</h5>
+              <span>Parent of Grade 3 Learner</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>We are so grateful for the cultural programs at this school. Our children are learning to be proud of their heritage while receiving an excellent education.</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">NP</div>
+            <div>
+              <h5>Nomsa Phiri</h5>
+              <span>Parent of Grade 5 Learner</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <p>The dedication of the staff is remarkable. They go above and beyond to ensure every child succeeds. Highly recommend this school!</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SM</div>
+            <div>
+              <h5>Sipho Mabaso</h5>
+              <span>Parent of Grade 7 Learner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Want to See More?</h2>
+    <p>Schedule a visit to experience the vibrant atmosphere of Hammanskraal Elite School in person.</p>
+    <a href="contact.html" class="cta-btn">Book a School Tour</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="logo.png" alt="Logo" class="footer-logo-img">
+            <div class="logo-text">
+              <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
+              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+            </div>
+          </div>
+          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="admissions.html">Admissions</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Info</h4>
+          <ul class="footer-links">
+            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
+            <li><a href="#">📞 +27 (12) 000 0000</a></li>
+            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>School Hours</h4>
+          <ul class="footer-links">
+            <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
+            <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
+            <li><a href="#">Sat - Sun: Closed</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <div>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

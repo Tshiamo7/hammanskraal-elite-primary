@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hammanskraal Elite School - We Are Special</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    :root {
+      --navy: #1a2744;
+      --red: #c41e3a;
+      --gold: #B8860B;
+      --gray: #4a4a4a;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 50;
+      padding: 16px 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .navbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 4px;
+    }
+    .logo-text span:first-child {
+      font-size: 22px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      display: block;
+      line-height: 1.1;
+    }
+    .logo-text span:last-child {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .nav-links a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: white;
+      text-decoration: none;
+    }
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 16px;
+    }
+    .btn-outline {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 12px 24px;
+      border: 1px solid white;
+      color: white;
+      background: transparent;
+      cursor: pointer;
+    }
+    .btn-red {
+      background: var(--red);
+      color: white;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      padding: 12px 24px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-red:hover {
+      background: #a01830;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.5;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5), transparent);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
+      margin-top: 80px;
+    }
+    .hero-text {
+      max-width: 640px;
+    }
+    .hero-tag {
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 52px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 32px;
+    }
+    .hero h1 span {
+      color: var(--red);
+      font-style: italic;
+    }
+    .hero-desc {
+      font-size: 18px;
+      color: #e0e0e0;
+      margin-bottom: 40px;
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 500px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 24px;
+    }
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      padding: 16px 40px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: #a01830;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 16px 40px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .hero-accent {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 25%;
+      height: 128px;
+      background: var(--red);
+    }
+    .hero-watermark {
+      position: absolute;
+      bottom: 48px;
+      right: 48px;
+      color: rgba(255,255,255,0.08);
+      font-size: 80px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    /* Values */
+    .values {
+      padding: 100px 24px;
+      background: white;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .values-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .values-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 60px;
+    }
+    .values-header-text {
+      max-width: 576px;
+    }
+    .section-tag {
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 16px;
+    }
+    .values-header h2 {
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+    }
+    .values-line {
+      height: 1px;
+      background: #e5e7eb;
+      flex: 1;
+      margin-bottom: 24px;
+      margin-left: 48px;
+      margin-right: 48px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-left: 1px solid #f3f4f6;
+      border-top: 1px solid #f3f4f6;
+    }
+    .value-card {
+      padding: 40px;
+      border-right: 1px solid #f3f4f6;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .value-icon {
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+    .value-card h3 {
+      font-size: 20px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .value-card p {
+      color: #6b7280;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* Culture */
+    .culture {
+      padding: 100px 24px;
+      background: #fafafa;
+    }
+    .culture-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .culture h2 {
+      font-size: 40px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--navy);
+      margin-bottom: 32px;
+      line-height: 1.2;
+    }
+    .culture-text {
+      color: #6b7280;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+    .culture-text p {
+      margin-bottom: 24px;
+    }
+    .culture-stats {
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid #e5e7eb;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .stat-number {
+      display: block;
+      font-size: 30px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: var(--red);
+    }
+    .stat-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+      color: #9ca3af;
+    }
+    .culture-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .culture-col {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .culture-col:last-child {
+      padding-top: 48px;
+    }
+    .culture-img {
+      overflow: hidden;
+    }
+    .culture-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .culture-quote {
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      color: white;
+      text-align: center;
+      height: 200px;
+    }
+    .culture-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy);
+      color: white;
+      padding: 80px 24px 48px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 64px;
+      margin-bottom: 60px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .footer-logo-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      background: white;
+      border-radius: 50%;
+      padding: 2px;
+    }
+    .footer-desc {
+      color: #9ca3af;
+      line-height: 1.7;
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .footer h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      margin-bottom: 24px;
+      font-size: 18px;
+    }
+    .contact-list {
+      list-style: none;
+      color: #9ca3af;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .contact-icon {
+      color: var(--red);
+    }
+    .contact-text {
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .resource-list {
+      list-style: none;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .resource-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .resource-list a {
+      color: #9ca3af;
+      text-decoration: none;
+      font-weight: 300;
+    }
+    .resource-list a:hover {
+      color: var(--red);
+    }
+    .inquiry-text {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 24px;
+      font-weight: 300;
+    }
+    .inquiry-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .inquiry-form input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 14px;
+      font-size: 14px;
+      color: white;
+      outline: none;
+    }
+    .inquiry-form button {
+      background: var(--red);
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 10px;
+      padding: 14px;
+      border: none;
+      cursor: pointer;
+    }
+    .inquiry-form button:hover {
+      background: #a01830;
+    }
+    .footer-bottom {
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+    }
+    .footer-links {
+      display: flex;
+      gap: 40px;
+    }
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+    .footer-links a:hover {
+      color: var(--red);
+    }
+
+    /* Chatbot Button */
+    .chatbot-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-radius: 50%;
+    }
+    .chatbot-btn:hover {
+      background: #a01830;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">
+        <img src="logo.png" alt="Hammanskraal Elite School Logo" class="logo-img">
+        <div class="logo-text">
+          <span>Hammanskraal Elite</span>
+          <span>We Are Special</span>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Academics</a>
+        <a href="#">Admissions</a>
+        <a href="#">Gallery</a>
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-outline">Contact Us</button>
+        <button class="btn-red">Enrol Now</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="hero-main.jpg" alt="Hammanskraal Elite School Students">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-tag">Hammanskraal • Gauteng</p>
+        <h1>Where Every Child <br><span>Is Special</span></h1>
+        <p class="hero-desc">At Hammanskraal Elite School, we nurture young minds with excellence, celebrate our rich South African heritage, and prepare children to become leaders of tomorrow.</p>
+        <div class="hero-buttons">
+          <button class="btn-primary">Virtual Tour →</button>
+          <button class="btn-secondary">Our Story</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-accent"></div>
+    <div class="hero-watermark">We Are Special</div>
+  </section>
+
+  <!-- Values -->
+  <section class="values">
+    <div class="values-inner">
+      <div class="values-header">
+        <div class="values-header-text">
+          <p class="section-tag">Our Foundations</p>
+          <h2>The Pillars of Excellence</h2>
+        </div>
+        <div class="values-line"></div>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
+          <h3>Academic Excellence</h3>
+          <p>A strong foundation in literacy, numeracy, and critical thinking to prepare learners for high school and beyond.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+          </div>
+          <h3>Character & Values</h3>
+          <p>Building integrity, respect, and responsibility in every learner through Ubuntu principles and moral guidance.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <h3>Cultural Pride</h3>
+          <p>Celebrating our South African heritage through traditional dance, music, and cultural events throughout the year.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </div>
+          <h3>Holistic Growth</h3>
+          <p>Nurturing the whole child through sports, arts, and extracurricular activities that develop confidence and teamwork.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Culture -->
+  <section class="culture">
+    <div class="culture-inner">
+      <div>
+        <p class="section-tag">School Life</p>
+        <h2>A Vibrant Community <br>of Young Leaders</h2>
+        <div class="culture-text">
+          <p>At Hammanskraal Elite, education extends beyond the classroom. We celebrate our rich South African culture through traditional dance, music performances, and heritage day celebrations that connect our learners to their roots.</p>
+          <p>Our learners participate in annual graduation ceremonies, sports days, cultural events, and community outreach programmes that build character and create lasting memories.</p>
+        </div>
+        <div class="culture-stats">
+          <div>
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Years of Excellence</span>
+          </div>
+          <div>
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Dedicated Staff</span>
+          </div>
+        </div>
+      </div>
+      <div class="culture-images">
+        <div class="culture-col">
+          <div class="culture-img" style="height: 350px;">
+            <img src="culture-dance.jpg" alt="Cultural Dance Performance">
+          </div>
+          <div class="culture-quote">
+            <p>"We Are Special — <br>Every child matters, <br>every dream counts."</p>
+          </div>
+        </div>
+        <div class="culture-col">
+          <div class="culture-img" style="height: 200px;">
+            <img src="culture-graduation.jpg" alt="Graduation Ceremony">
+          </div>
+          <div class="culture-img" style="height: 350px;">
+            <img src="graduation-girls.jpg" alt="Graduation Girls">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">
+            <img src="logo.png" alt="Hammanskraal Elite School Logo" class="footer-logo-img">
+            <div class="logo-text">
+              <span style="color: white; font-size: 18px;">Hammanskraal Elite</span>
+              <span style="color: var(--gold); font-size: 10px;">We Are Special</span>
+            </div>
+          </div>
+          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage in Hammanskraal.</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <span class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="contact-text">Hammanskraal, Gauteng, South Africa</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span class="contact-text">+27 (12) 000 0000</span>
+            </li>
+            <li class="contact-item">
+              <span class="contact-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <span class="contact-text">info@hammanskraalelite.co.za</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul class="resource-list">
+            <li><a href="#">About Our School</a></li>
+            <li><a href="#">Academic Programme</a></li>
+            <li><a href="#">Admissions</a></li>
+            <li><a href="#">School Fees</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Stay Connected</h4>
+          <p class="inquiry-text">Subscribe to receive news and updates from Hammanskraal Elite School.</p>
+          <div class="inquiry-form">
+            <input type="email" placeholder="Your Email Address">
+            <button>Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <div class="footer-links">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">POPIA</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chatbot Button -->
+  <button class="chatbot-btn">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+</body>
+</html>

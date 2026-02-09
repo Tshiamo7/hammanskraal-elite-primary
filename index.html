@@ -11,9 +11,9 @@
     .serif { font-family: 'Playfair Display', Georgia, serif; }
 
     :root {
-      --navy: #1a2744;
-      --red: #c41e3a;
-      --gold: #B8860B;
+      --navy: #2C3E6B;
+      --red: #CC5500;
+      --gold: #E8D5A3;
       --gray: #4a4a4a;
     }
 
@@ -544,9 +544,101 @@
       background: #a01830;
     }
 
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 61;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+      display: block;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--navy);
+      z-index: 50;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .mobile-menu.active {
+      max-height: 500px;
+    }
+    .mobile-menu-inner {
+      padding: 8px 24px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-menu a {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu a:hover, .mobile-menu a:active {
+      color: var(--gold);
+    }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px;
+      background: var(--red);
+      color: white;
+      padding: 14px 0;
+      text-align: center;
+      border-bottom: none;
+      border-radius: 4px;
+    }
+    .mobile-menu .mobile-cta:hover {
+      background: #a01830;
+      color: white;
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 40;
+    }
+    .mobile-overlay.active {
+      display: block;
+    }
+
     /* Responsive */
     @media (max-width: 1024px) {
       .nav-links, .nav-buttons { display: none; }
+      .hamburger { display: flex; }
       .values-grid { grid-template-columns: repeat(2, 1fr); }
       .culture-inner { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -581,8 +673,25 @@
         <a href="contact.html" class="btn-outline">Contact Us</a>
         <a href="admissions.html" class="btn-red">Enrol Now</a>
       </div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+      </div>
     </div>
   </nav>
+  <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 
   <!-- Hero -->
   <section class="hero">
@@ -594,7 +703,7 @@
       <div class="hero-text">
         <p class="hero-tag">Hammanskraal • Gauteng</p>
         <h1>Where Every Child <br><span>Is Special</span></h1>
-        <p class="hero-desc">At Hammanskraal Elite School, we nurture young minds with excellence, celebrate our rich South African heritage, and prepare children to become leaders of tomorrow.</p>
+        <p class="hero-desc">At Hammanskraal Elite Primary School, we nurture young minds with excellence, celebrate our rich South African heritage, and prepare children to become leaders of tomorrow.</p>
         <div class="hero-buttons">
           <a href="gallery.html" class="btn-primary">Virtual Tour →</a>
           <a href="about.html" class="btn-secondary">Our Story</a>
@@ -702,7 +811,7 @@
               <span style="color: var(--gold); font-size: 10px;">We Are Special</span>
             </div>
           </div>
-          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage in Hammanskraal.</p>
+          <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
         </div>
         <div>
           <h4>Contact</h4>
@@ -761,5 +870,13 @@
   <button class="chatbot-btn">
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   </button>
+
+  <script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('active');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+  }
+  </script>
 </body>
 </html>

@@ -9,9 +9,9 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     :root {
-      --navy: #1a2744;
-      --red: #c41e3a;
-      --gold: #B8860B;
+      --navy: #2C3E6B;
+      --red: #CC5500;
+      --gold: #E8D5A3;
     }
 
     /* Navbar */
@@ -449,13 +449,105 @@
       font-size: 12px;
       color: #6b7280;
     }
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 61;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+      display: block;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--navy);
+      z-index: 50;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .mobile-menu.active {
+      max-height: 500px;
+    }
+    .mobile-menu-inner {
+      padding: 8px 24px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-menu a {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu a:hover, .mobile-menu a:active {
+      color: var(--gold);
+    }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px;
+      background: var(--red);
+      color: white;
+      padding: 14px 0;
+      text-align: center;
+      border-bottom: none;
+      border-radius: 4px;
+    }
+    .mobile-menu .mobile-cta:hover {
+      background: #a01830;
+      color: white;
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 40;
+    }
+    .mobile-overlay.active {
+      display: block;
+    }
+    @media (max-width: 1024px) {
+      .nav-links, .nav-buttons { display: none; }
+      .hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
-      <a href="preview.html" class="logo">
+      <a href="index.html" class="logo">
         <img src="logo.png" alt="Logo" class="logo-img">
         <div class="logo-text">
           <span>Hammanskraal Elite</span>
@@ -463,7 +555,7 @@
         </div>
       </a>
       <div class="nav-links">
-        <a href="preview.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="academics.html" class="active">Academics</a>
         <a href="admissions.html">Admissions</a>
@@ -474,15 +566,32 @@
         <a href="contact.html" class="btn-outline">Contact Us</a>
         <a href="admissions.html" class="btn-red">Enrol Now</a>
       </div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+      </div>
     </div>
   </nav>
+  <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 
   <!-- Page Header -->
   <header class="page-header">
     <h1>Academic Programme</h1>
     <p>Discover our comprehensive curriculum designed to nurture young minds and prepare learners for future success.</p>
     <div class="breadcrumb">
-      <a href="preview.html">Home</a> / Academics
+      <a href="index.html">Home</a> / Academics
     </div>
   </header>
 
@@ -494,13 +603,13 @@
           <p class="section-tag">Our Approach</p>
           <h2 class="section-title">A Curriculum Built for Excellence</h2>
           <p>
-            At Hammanskraal Elite School, we follow the CAPS (Curriculum and Assessment Policy Statement) curriculum as prescribed by the Department of Basic Education. Our dedicated teachers bring this curriculum to life through engaging lessons, hands-on activities, and personalized attention.
+            At Hammanskraal Elite Primary School, we follow the CAPS (Curriculum and Assessment Policy Statement) curriculum as prescribed by the Department of Basic Education. Our primary medium of instruction is English (Home Language), with Afrikaans integrated as the mandatory First Additional Language. All academic instruction, assessments, and official correspondence are conducted in English.
           </p>
           <p>
-            We believe in developing the whole child – academically, socially, emotionally, and physically. Our balanced approach ensures that learners not only excel in their studies but also develop critical thinking skills, creativity, and a love for learning.
+            We believe in developing the whole child – academically, socially, emotionally, and physically. Our balanced approach ensures that learners not only excel in their studies but also develop critical thinking skills, creativity, and a love for learning. The school utilises a system of continuous assessment to monitor and report on learner progress.
           </p>
           <p>
-            Small class sizes allow our teachers to provide individualized attention, ensuring that every learner receives the support they need to reach their full potential.
+            Small class sizes allow our teachers to provide individualized attention, ensuring that every learner receives the support they need to reach their full potential. Learners are responsible for the completion of all classwork, homework, and formal assessments.
           </p>
         </div>
         <div class="curriculum-image">
@@ -526,8 +635,8 @@
           <div class="grade-content">
             <p>Building strong foundations in literacy and numeracy through play-based learning and structured activities.</p>
             <ul class="grade-subjects">
-              <li>Home Language</li>
-              <li>First Additional Language</li>
+              <li>English (Home Language)</li>
+              <li>Afrikaans (First Additional Language)</li>
               <li>Mathematics</li>
               <li>Life Skills</li>
             </ul>
@@ -541,7 +650,7 @@
           <div class="grade-content">
             <p>Expanding knowledge and developing critical thinking skills across a broader range of subjects.</p>
             <ul class="grade-subjects">
-              <li>Languages (Home & FAL)</li>
+              <li>English & Afrikaans</li>
               <li>Mathematics</li>
               <li>Natural Sciences</li>
               <li>Social Sciences</li>
@@ -558,7 +667,7 @@
           <div class="grade-content">
             <p>Preparing learners for high school with advanced academic skills and independent learning habits.</p>
             <ul class="grade-subjects">
-              <li>Languages (Home & FAL)</li>
+              <li>English & Afrikaans</li>
               <li>Mathematics</li>
               <li>Natural Sciences</li>
               <li>Social Sciences</li>
@@ -584,7 +693,7 @@
         <div class="subject-card">
           <div class="subject-icon">📖</div>
           <h4>Languages</h4>
-          <p>Developing strong reading, writing, and communication skills in Home Language and English.</p>
+          <p>Developing strong reading, writing, and communication skills in English (Home Language) and Afrikaans (First Additional Language).</p>
         </div>
         <div class="subject-card">
           <div class="subject-icon">🔢</div>
@@ -651,14 +760,14 @@
           <div class="method-number">03</div>
           <div class="method-content">
             <h4>Continuous Assessment</h4>
-            <p>Regular assessments help us track progress and ensure every learner is on the path to success.</p>
+            <p>The school utilises a system of continuous assessment to monitor and report on learner progress, ensuring every learner is on the path to success.</p>
           </div>
         </div>
         <div class="method-card">
           <div class="method-number">04</div>
           <div class="method-content">
             <h4>Parent Partnership</h4>
-            <p>We keep parents informed and involved in their child's education through regular communication and meetings.</p>
+            <p>Parents are expected to facilitate a conducive learning environment at home and attend academic progress meetings as requested by the school.</p>
           </div>
         </div>
       </div>
@@ -714,7 +823,7 @@
               <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
             </div>
           </div>
-          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage.</p>
+          <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -752,5 +861,13 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('active');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+  }
+  </script>
 </body>
 </html>

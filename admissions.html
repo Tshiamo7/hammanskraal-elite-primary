@@ -9,9 +9,9 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     :root {
-      --navy: #1a2744;
-      --red: #c41e3a;
-      --gold: #B8860B;
+      --navy: #2C3E6B;
+      --red: #CC5500;
+      --gold: #E8D5A3;
     }
 
     /* Navbar */
@@ -563,13 +563,105 @@
       font-size: 12px;
       color: #6b7280;
     }
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 61;
+    }
+    .hamburger span {
+      width: 24px;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+      display: block;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    .mobile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--navy);
+      z-index: 50;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .mobile-menu.active {
+      max-height: 500px;
+    }
+    .mobile-menu-inner {
+      padding: 8px 24px 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .mobile-menu a {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: bold;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+    .mobile-menu a:hover, .mobile-menu a:active {
+      color: var(--gold);
+    }
+    .mobile-menu .mobile-cta {
+      margin-top: 16px;
+      background: var(--red);
+      color: white;
+      padding: 14px 0;
+      text-align: center;
+      border-bottom: none;
+      border-radius: 4px;
+    }
+    .mobile-menu .mobile-cta:hover {
+      background: #a01830;
+      color: white;
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: 40;
+    }
+    .mobile-overlay.active {
+      display: block;
+    }
+    @media (max-width: 1024px) {
+      .nav-links, .nav-buttons { display: none; }
+      .hamburger { display: flex; }
+    }
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
-      <a href="preview.html" class="logo">
+      <a href="index.html" class="logo">
         <img src="logo.png" alt="Logo" class="logo-img">
         <div class="logo-text">
           <span>Hammanskraal Elite</span>
@@ -577,7 +669,7 @@
         </div>
       </a>
       <div class="nav-links">
-        <a href="preview.html">Home</a>
+        <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="academics.html">Academics</a>
         <a href="admissions.html" class="active">Admissions</a>
@@ -588,15 +680,32 @@
         <a href="contact.html" class="btn-outline">Contact Us</a>
         <a href="admissions.html" class="btn-red">Enrol Now</a>
       </div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="mobile-menu-inner">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="academics.html">Academics</a>
+        <a href="admissions.html">Admissions</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="contact.html">Contact</a>
+        <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+      </div>
     </div>
   </nav>
+  <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMenu()"></div>
 
   <!-- Page Header -->
   <header class="page-header">
     <h1>Admissions</h1>
     <p>Join our school family! Learn about our admission process, requirements, and fees.</p>
     <div class="breadcrumb">
-      <a href="preview.html">Home</a> / Admissions
+      <a href="index.html">Home</a> / Admissions
     </div>
   </header>
 
@@ -671,66 +780,32 @@
     <div class="section-inner">
       <div style="text-align: center; margin-bottom: 60px;">
         <p class="section-tag">Investment in Education</p>
-        <h2 class="section-title">School Fees 2024</h2>
+        <h2 class="section-title">School Fees 2026</h2>
       </div>
-      <div class="fees-grid">
-        <div class="fee-card">
-          <div class="fee-header">
-            <h3>Foundation Phase</h3>
-            <span>Grade R - Grade 3</span>
-          </div>
-          <div class="fee-price">
-            <h4>R850 <span>/month</span></h4>
-            <p>or R8,500 annually</p>
-          </div>
-          <ul class="fee-features">
-            <li>Full CAPS curriculum</li>
-            <li>Learning materials included</li>
-            <li>Extra-curricular activities</li>
-            <li>Progress reports</li>
-          </ul>
-          <a href="#apply" class="fee-btn">Apply Now</a>
-        </div>
+      <div style="max-width: 500px; margin: 0 auto;">
         <div class="fee-card featured">
           <div class="fee-header">
-            <h3>Intermediate Phase</h3>
-            <span>Grade 4 - Grade 6</span>
+            <h3>All Grades</h3>
+            <span>Grade R - Grade 7</span>
           </div>
           <div class="fee-price">
-            <h4>R950 <span>/month</span></h4>
-            <p>or R9,500 annually</p>
+            <h4>R1,400 <span>/month</span></h4>
+            <p>R4,200 per term · R14,000 annually</p>
           </div>
           <ul class="fee-features">
             <li>Full CAPS curriculum</li>
+            <li>English (Home Language) & Afrikaans (First Additional Language)</li>
             <li>Learning materials included</li>
             <li>Computer literacy</li>
             <li>Extra-curricular activities</li>
-            <li>Progress reports</li>
-          </ul>
-          <a href="#apply" class="fee-btn">Apply Now</a>
-        </div>
-        <div class="fee-card">
-          <div class="fee-header">
-            <h3>Senior Phase</h3>
-            <span>Grade 7</span>
-          </div>
-          <div class="fee-price">
-            <h4>R1,050 <span>/month</span></h4>
-            <p>or R10,500 annually</p>
-          </div>
-          <ul class="fee-features">
-            <li>Full CAPS curriculum</li>
-            <li>Learning materials included</li>
-            <li>Computer literacy</li>
-            <li>High school preparation</li>
-            <li>Career guidance</li>
-            <li>Extra-curricular activities</li>
+            <li>Continuous assessment & progress reports</li>
+            <li>High school preparation & career guidance</li>
           </ul>
           <a href="#apply" class="fee-btn">Apply Now</a>
         </div>
       </div>
       <p style="text-align: center; color: #6b7280; margin-top: 32px; font-size: 14px;">
-        * Registration fee of R500 applies to all new admissions. Payment plans available upon request.
+        * Registration fee of R500 applies to all new admissions. Fees must be settled in full according to the agreed-upon payment structure (Monthly, Termly, or Annually). Should financial difficulties arise, parents are obligated to communicate with the bursar's office immediately to discuss potential arrangements.
       </p>
     </div>
   </section>
@@ -831,8 +906,8 @@
           <p class="faq-answer">Our school year follows the national school calendar, typically starting in mid-January and ending in early December. We have four terms with school holidays in between.</p>
         </div>
         <div class="faq-item">
-          <h4 class="faq-question">What are the school hours?</h4>
-          <p class="faq-answer">School hours are from 7:30 AM to 2:30 PM, Monday to Friday. The school office is open from 7:00 AM to 4:00 PM for enquiries and administrative matters.</p>
+          <h4 class="faq-question">What are the school hours and attendance policy?</h4>
+          <p class="faq-answer">School hours are from 7:30 AM to 2:30 PM, Monday to Friday. Learners are required to attend school daily and arrive before the commencement of the first period. Any absence must be substantiated by a written explanation or medical certificate from a parent/guardian. Persistent late arrivals or unexcused absenteeism will result in a formal report to the parents and potential disciplinary review. The school office is open from 7:00 AM to 4:00 PM for enquiries and administrative matters.</p>
         </div>
         <div class="faq-item">
           <h4 class="faq-question">Do you offer after-care services?</h4>
@@ -840,11 +915,11 @@
         </div>
         <div class="faq-item">
           <h4 class="faq-question">What is your learner-to-teacher ratio?</h4>
-          <p class="faq-answer">We maintain small class sizes with a maximum of 35 learners per class, ensuring each child receives adequate attention and support from our teachers.</p>
+          <p class="faq-answer">We maintain small class sizes with a maximum of 35 learners per class, ensuring each child receives adequate attention and support from our teachers. Learners must maintain a high level of respect for educators, support staff, and peers. Bullying, physical altercations, vandalism, and insubordination are strictly prohibited.</p>
         </div>
         <div class="faq-item">
           <h4 class="faq-question">Is there a school uniform?</h4>
-          <p class="faq-answer">Yes, all learners are required to wear the official school uniform. Details about the uniform and where to purchase it will be provided upon admission.</p>
+          <p class="faq-answer">Yes, the prescribed school uniform must be worn in its entirety every school day. Uniforms must be clean, pressed, and in good repair. Any temporary deviation from the uniform code requires a written explanation from a parent or guardian for administrative approval. Details about the uniform and where to purchase it will be provided upon admission.</p>
         </div>
       </div>
     </div>
@@ -887,7 +962,7 @@
               <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
             </div>
           </div>
-          <p class="footer-desc">Nurturing young minds with excellence and celebrating our South African heritage.</p>
+          <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -925,5 +1000,13 @@
       </div>
     </div>
   </footer>
+
+  <script>
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.getElementById('mobileMenu').classList.toggle('active');
+    document.getElementById('mobileOverlay').classList.toggle('active');
+  }
+  </script>
 </body>
 </html>

@@ -540,6 +540,29 @@
     @media (max-width: 1024px) {
       .nav-links, .nav-buttons { display: none; }
       .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .subjects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .page-header { padding: 130px 24px 60px; }
+      .page-header h1 { font-size: 36px; }
+      .page-header p { font-size: 16px; }
+      .section { padding: 60px 24px; }
+      .section-title { font-size: 30px; }
+      .curriculum-intro { grid-template-columns: 1fr; gap: 40px; }
+      .curriculum-image img { height: 300px; }
+      .grades-grid { grid-template-columns: 1fr; }
+      .methods-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .activity-card { height: 220px; }
+    }
+    @media (max-width: 640px) {
+      .page-header h1 { font-size: 28px; }
+      .section-title { font-size: 26px; }
+      .subjects-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+      .cta-section h2 { font-size: 28px; }
     }
   </style>
 </head>

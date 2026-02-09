@@ -438,10 +438,15 @@
     }
 
     /* FAQ Section */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
     .faq-mini {
       background: white;
       padding: 32px;
-      margin-top: 48px;
+      margin-top: 0;
     }
     .faq-mini h4 {
       font-family: 'Playfair Display', serif;
@@ -610,6 +615,32 @@
     @media (max-width: 1024px) {
       .nav-links, .nav-buttons { display: none; }
       .hamburger { display: flex; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .page-header { padding: 130px 24px 60px; }
+      .page-header h1 { font-size: 36px; }
+      .page-header p { font-size: 16px; }
+      .section { padding: 60px 24px; }
+      .section-title { font-size: 30px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-info { padding-right: 0; }
+      .contact-form { padding: 32px; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .quick-contact-grid { grid-template-columns: repeat(2, 1fr); margin-top: -40px; }
+      .hours-grid { grid-template-columns: 1fr; gap: 40px; }
+      .hours-table { grid-template-columns: 1fr; }
+      .hours-content h2 { font-size: 28px; }
+      .map-section { height: 300px; }
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .page-header h1 { font-size: 28px; }
+      .section-title { font-size: 26px; }
+      .quick-contact-grid { grid-template-columns: 1fr; margin-top: -20px; }
+      .contact-icon { width: 48px; height: 48px; font-size: 20px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>
@@ -835,7 +866,7 @@
         <p class="section-tag">Common Questions</p>
         <h2 class="section-title">Frequently Asked</h2>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+      <div class="faq-grid">
         <div class="faq-mini">
           <h4>How do I schedule a school tour?</h4>
           <p>You can schedule a school tour by calling our office, sending an email, or filling out the contact form above. We typically respond within 24 hours to arrange a convenient time.</p>

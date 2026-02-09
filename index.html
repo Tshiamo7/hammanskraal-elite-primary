@@ -643,11 +643,28 @@
       .culture-inner { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .hero-desc { font-size: 16px; }
+      .values-header { flex-direction: column; align-items: flex-start; }
+      .values-line { display: none; }
+      .values-header h2 { font-size: 32px; }
+      .culture h2 { font-size: 32px; }
+      .culture-stats { grid-template-columns: 1fr 1fr; }
+    }
     @media (max-width: 640px) {
-      .hero h1 { font-size: 36px; }
+      .hero h1 { font-size: 32px; }
+      .hero-buttons { flex-direction: column; }
+      .hero-buttons a { text-align: center; }
       .values-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .culture-images { grid-template-columns: 1fr; }
+      .culture-col:last-child { padding-top: 0; }
+      .culture-img { height: auto !important; }
+      .culture-img img { height: 250px; }
+      .culture-quote { height: auto; padding: 24px; }
+      .culture-quote p { font-size: 18px; }
+      .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
   </style>
 </head>

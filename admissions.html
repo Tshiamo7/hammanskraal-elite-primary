@@ -255,83 +255,60 @@
     }
 
     /* Fees */
-    .fees-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+    .fees-section {
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .fee-card {
-      background: white;
-      border: 2px solid #e5e7eb;
-      text-align: center;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .fee-card:hover {
-      border-color: var(--red);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    }
-    .fee-card.featured {
-      border-color: var(--red);
-      position: relative;
-    }
-    .fee-card.featured::before {
-      content: 'Most Popular';
-      position: absolute;
-      top: 20px;
-      right: -35px;
-      background: var(--red);
-      color: white;
-      padding: 4px 40px;
-      font-size: 10px;
-      text-transform: uppercase;
-      transform: rotate(45deg);
-    }
-    .fee-header {
+    .fees-banner {
       background: var(--navy);
-      padding: 32px;
+      padding: 48px;
+      text-align: center;
     }
-    .fee-card.featured .fee-header {
-      background: var(--red);
-    }
-    .fee-header h3 {
-      color: white;
-      font-family: 'Playfair Display', serif;
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    .fee-header span {
+    .fees-banner-label {
       color: var(--gold);
       font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      margin-bottom: 8px;
     }
-    .fee-card.featured .fee-header span {
-      color: rgba(255,255,255,0.8);
-    }
-    .fee-price {
-      padding: 32px;
-      background: #fafafa;
-    }
-    .fee-price h4 {
-      font-size: 48px;
+    .fees-banner h3 {
       font-family: 'Playfair Display', serif;
-      color: var(--navy);
+      color: white;
+      font-size: 56px;
+      line-height: 1;
+      margin-bottom: 8px;
     }
-    .fee-price h4 span {
-      font-size: 18px;
-      color: #6b7280;
+    .fees-banner h3 span {
+      font-size: 22px;
+      color: #9ca3af;
+      font-weight: normal;
     }
-    .fee-price p {
-      color: #6b7280;
-      font-size: 12px;
-      margin-top: 8px;
+    .fees-banner-options {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 20px;
     }
-    .fee-features {
-      padding: 32px;
+    .fees-banner-option {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .fees-banner-option strong {
+      color: var(--gold);
+    }
+    .fees-body {
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+    .fees-inclusions {
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 48px;
       list-style: none;
-      text-align: left;
     }
-    .fee-features li {
+    .fees-inclusions li {
       padding: 12px 0;
       border-bottom: 1px solid #f0f0f0;
       color: #4b5563;
@@ -340,26 +317,44 @@
       align-items: center;
       gap: 12px;
     }
-    .fee-features li::before {
+    .fees-inclusions li::before {
       content: '✓';
       color: var(--red);
       font-weight: bold;
+      flex-shrink: 0;
     }
-    .fee-btn {
-      display: block;
-      margin: 0 32px 32px;
-      padding: 16px;
-      background: var(--navy);
+    .fees-cta {
+      padding: 0 48px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .fees-cta p {
+      color: #6b7280;
+      font-size: 13px;
+      line-height: 1.6;
+      max-width: 500px;
+    }
+    .fees-cta a {
+      background: var(--red);
       color: white;
+      padding: 16px 40px;
       text-decoration: none;
       text-transform: uppercase;
       font-size: 12px;
       font-weight: bold;
       letter-spacing: 0.1em;
+      white-space: nowrap;
       transition: background 0.3s ease;
     }
-    .fee-btn:hover {
-      background: var(--red);
+    .fees-cta a:hover {
+      background: #a03d00;
+    }
+    @media (max-width: 640px) {
+      .fees-banner-options { flex-direction: column; gap: 8px; }
+      .fees-inclusions { grid-template-columns: 1fr; }
+      .fees-cta { flex-direction: column; text-align: center; }
     }
 
     /* Application Form */
@@ -782,31 +777,33 @@
         <p class="section-tag">Investment in Education</p>
         <h2 class="section-title">School Fees 2026</h2>
       </div>
-      <div style="max-width: 500px; margin: 0 auto;">
-        <div class="fee-card featured">
-          <div class="fee-header">
-            <h3>All Grades</h3>
-            <span>Grade R - Grade 7</span>
+      <div class="fees-section">
+        <div class="fees-banner">
+          <p class="fees-banner-label">Grade R – Grade 7 · 2026</p>
+          <h3>R1,400 <span>/month</span></h3>
+          <div class="fees-banner-options">
+            <span class="fees-banner-option"><strong>Monthly:</strong> R1,400</span>
+            <span class="fees-banner-option"><strong>Termly:</strong> R4,200</span>
+            <span class="fees-banner-option"><strong>Annually:</strong> R14,000</span>
           </div>
-          <div class="fee-price">
-            <h4>R1,400 <span>/month</span></h4>
-            <p>R4,200 per term · R14,000 annually</p>
-          </div>
-          <ul class="fee-features">
+        </div>
+        <div class="fees-body">
+          <ul class="fees-inclusions">
             <li>Full CAPS curriculum</li>
-            <li>English (Home Language) & Afrikaans (First Additional Language)</li>
             <li>Learning materials included</li>
+            <li>English (Home Language) & Afrikaans (FAL)</li>
             <li>Computer literacy</li>
             <li>Extra-curricular activities</li>
             <li>Continuous assessment & progress reports</li>
             <li>High school preparation & career guidance</li>
+            <li>Registration fee: R500 (new admissions)</li>
           </ul>
-          <a href="#apply" class="fee-btn">Apply Now</a>
+          <div class="fees-cta">
+            <p>Fees must be settled according to the agreed-upon payment structure. Should financial difficulties arise, please contact the bursar's office to discuss arrangements.</p>
+            <a href="#apply">Apply Now</a>
+          </div>
         </div>
       </div>
-      <p style="text-align: center; color: #6b7280; margin-top: 32px; font-size: 14px;">
-        * Registration fee of R500 applies to all new admissions. Fees must be settled in full according to the agreed-upon payment structure (Monthly, Termly, or Annually). Should financial difficulties arise, parents are obligated to communicate with the bursar's office immediately to discuss potential arrangements.
-      </p>
     </div>
   </section>
 

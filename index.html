@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hammanskraal Elite School - Primary School</title>
+  <link rel="preload" href="hero-video.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="hero-poster.jpg" as="image">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -745,8 +747,8 @@
   <!-- Hero -->
   <section class="hero">
     <div class="hero-bg">
-      <video class="hero-video active" autoplay muted playsinline src="hero-video.mp4"></video>
-      <video class="hero-video" muted playsinline src="hero-video-2.mp4"></video>
+      <video class="hero-video active" autoplay muted playsinline poster="hero-poster.jpg" src="hero-video.mp4"></video>
+      <video class="hero-video" muted playsinline preload="auto" src="hero-video-2.mp4"></video>
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">

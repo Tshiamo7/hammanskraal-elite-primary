@@ -17,14 +17,13 @@
 
     /* Navbar */
     .navbar {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 50;
       padding: 16px 0;
-      background: var(--navy);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      background: rgba(0,0,0,0.3);
     }
     .navbar-inner {
       max-width: 1280px;
@@ -114,11 +113,10 @@
     /* Page Header */
     .page-header {
       position: relative;
-      height: 220px;
+      height: 320px;
       overflow: hidden;
       display: flex;
       align-items: center;
-      margin-top: 92px;
     }
     .page-header img {
       position: absolute;
@@ -130,7 +128,7 @@
     .page-header-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(44,62,107,0.92) 0%, rgba(44,62,107,0.75) 50%, rgba(44,62,107,0.5) 100%);
+      background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5), transparent);
     }
     .page-header-content {
       position: relative;
@@ -576,7 +574,7 @@
       .subjects-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .page-header { height: 180px; margin-top: 82px; }
+      .page-header { height: 260px; }
       .page-header h1 { font-size: 28px; }
       .section { padding: 60px 24px; }
       .section-title { font-size: 30px; }
@@ -588,7 +586,7 @@
       .activity-card { height: 220px; }
     }
     @media (max-width: 640px) {
-      .page-header { height: 160px; margin-top: 76px; }
+      .page-header { height: 240px; }
       .page-header h1 { font-size: 26px; }
       .section-title { font-size: 26px; }
       .subjects-grid { grid-template-columns: 1fr; }

@@ -372,7 +372,7 @@
     /* Testimonials */
     .testimonials-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 32px;
     }
     .testimonial-card {
@@ -649,6 +649,37 @@
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
     }
+    /* WhatsApp Button */
+    @keyframes whatsapp-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-radius: 50%;
+      text-decoration: none;
+      animation: whatsapp-pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      background: #1ebe57;
+      transform: scale(1.1);
+      animation: none;
+    }
   </style>
 </head>
 <body>
@@ -659,7 +690,7 @@
         <img src="logo.png" alt="Logo" class="logo-img">
         <div class="logo-text">
           <span>Hammanskraal Elite</span>
-          <span>We Are Special</span>
+          <span>Primary School</span>
         </div>
       </a>
       <div class="nav-links">
@@ -689,6 +720,14 @@
         <a href="gallery.html">Gallery</a>
         <a href="contact.html">Contact</a>
         <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px;">
+          <a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="width: 36px; height: 36px; background: #1877F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="width: 36px; height: 36px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -712,23 +751,23 @@
       </div>
       <div class="featured-grid">
         <div class="featured-main">
-          <img src="hero-main.jpg" alt="School Event">
+          <img src="gallery-2.jpg" alt="School Assembly">
           <div class="featured-main-overlay">
-            <span>School Events</span>
-            <h3>Career Day Celebration 2024</h3>
+            <span>School Life</span>
+            <h3>Our Learners at Assembly</h3>
           </div>
         </div>
         <div class="featured-side">
           <div class="featured-side-item">
-            <img src="graduation-girls.jpg" alt="Graduation">
+            <img src="gallery-3.jpg" alt="Sports Champions">
             <div class="featured-side-overlay">
-              <h4>Grade R Graduation</h4>
+              <h4>Sports Champions</h4>
             </div>
           </div>
           <div class="featured-side-item">
-            <img src="culture-dance.jpg" alt="Cultural Day">
+            <img src="gallery-9.jpg" alt="Entrepreneurs Day">
             <div class="featured-side-overlay">
-              <h4>Heritage Day</h4>
+              <h4>Entrepreneurs Day 2025</h4>
             </div>
           </div>
         </div>
@@ -745,107 +784,114 @@
       </div>
 
       <div class="filter-tabs">
-        <button class="filter-tab active">All Photos</button>
-        <button class="filter-tab">Events</button>
-        <button class="filter-tab">Cultural</button>
-        <button class="filter-tab">Sports</button>
-        <button class="filter-tab">Graduation</button>
-        <button class="filter-tab">Classroom</button>
+        <button class="filter-tab active" data-filter="all">All Photos</button>
+        <button class="filter-tab" data-filter="campus">Campus</button>
+        <button class="filter-tab" data-filter="sports">Sports</button>
+        <button class="filter-tab" data-filter="events">Events</button>
+        <button class="filter-tab" data-filter="school-life">School Life</button>
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-item large">
-          <img src="cultural-celebration.jpg" alt="Cultural Celebration">
+        <div class="gallery-item large" data-category="campus">
+          <img src="gallery-1.jpg" alt="School Campus">
           <div class="gallery-overlay">
             <div>
-              <h4>Cultural Celebration</h4>
-              <span>Heritage Day 2024</span>
+              <h4>Our Campus</h4>
+              <span>School Grounds</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="culture-dance.jpg" alt="Traditional Dance">
+        <div class="gallery-item" data-category="school-life">
+          <img src="gallery-2.jpg" alt="Learners at Assembly">
           <div class="gallery-overlay">
             <div>
-              <h4>Traditional Dance</h4>
-              <span>Cultural Activities</span>
+              <h4>School Assembly</h4>
+              <span>Our Proud Learners</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="culture-graduation.jpg" alt="Graduation">
+        <div class="gallery-item" data-category="sports">
+          <img src="gallery-3.jpg" alt="Sports Team with Trophies">
           <div class="gallery-overlay">
             <div>
-              <h4>Graduation Ceremony</h4>
-              <span>Class of 2024</span>
+              <h4>Sports Champions</h4>
+              <span>Trophy Winners</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="culture-sports.jpg" alt="Sports Day">
+        <div class="gallery-item" data-category="sports">
+          <img src="gallery-4.jpg" alt="Sports Team">
           <div class="gallery-overlay">
             <div>
-              <h4>Sports Day</h4>
-              <span>Athletics</span>
+              <h4>H.E.P.S. Sports Team</h4>
+              <span>Ready to Compete</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="graduation-girls.jpg" alt="Graduation Girls">
+        <div class="gallery-item" data-category="school-life">
+          <img src="gallery-5.jpg" alt="Learners Seated at Assembly">
           <div class="gallery-overlay">
             <div>
-              <h4>Our Graduates</h4>
-              <span>Moving to Grade 1</span>
+              <h4>Morning Assembly</h4>
+              <span>School Life</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item large">
-          <img src="hero-main.jpg" alt="Career Day">
+        <div class="gallery-item large" data-category="events">
+          <img src="gallery-8.jpg" alt="School Outing">
           <div class="gallery-overlay">
             <div>
-              <h4>Career Day</h4>
-              <span>Inspiring Future Leaders</span>
+              <h4>School Outing</h4>
+              <span>Fun Day Out</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="school-event.jpg" alt="School Event">
+        <div class="gallery-item" data-category="sports">
+          <img src="gallery-6.jpg" alt="Athletes on Field">
           <div class="gallery-overlay">
             <div>
-              <h4>Annual Event</h4>
-              <span>School Activities</span>
+              <h4>Young Athletes</h4>
+              <span>Athletics Day</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="students-team.jpg" alt="Students Team">
+        <div class="gallery-item" data-category="sports">
+          <img src="gallery-7.jpg" alt="Trophies and Medals">
           <div class="gallery-overlay">
             <div>
-              <h4>Team Building</h4>
-              <span>Student Activities</span>
+              <h4>Our Achievements</h4>
+              <span>Trophies &amp; Medals</span>
             </div>
           </div>
         </div>
-        <div class="gallery-item">
-          <img src="culture-art.jpg" alt="Art Class">
+        <div class="gallery-item" data-category="events">
+          <img src="gallery-9.jpg" alt="Entrepreneurs Day 2025">
           <div class="gallery-overlay">
             <div>
-              <h4>Creative Arts</h4>
-              <span>Classroom Activities</span>
+              <h4>Entrepreneurs Day</h4>
+              <span>2025 Event</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="campus">
+          <img src="gallery-10.jpg" alt="School Classrooms">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Classrooms</h4>
+              <span>Campus View</span>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-item" data-category="campus">
+          <img src="gallery-11.jpg" alt="School Signboard">
+          <div class="gallery-overlay">
+            <div>
+              <h4>Hammanskraal Elite School</h4>
+              <span>Grade RR to Grade 7</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Video Section -->
-  <section class="video-section">
-    <h2>Watch Our Story</h2>
-    <p>See what makes Hammanskraal Elite School special through the eyes of our learners, parents, and staff.</p>
-    <div class="video-placeholder">
-      <img src="cultural-celebration.jpg" alt="Video Thumbnail">
-      <div class="play-button"></div>
     </div>
   </section>
 
@@ -858,32 +904,22 @@
       </div>
       <div class="testimonials-grid">
         <div class="testimonial-card">
-          <p>The teachers at Hammanskraal Elite truly care about every child. My daughter has flourished both academically and socially since joining the school.</p>
+          <p>Her academic growth and personal development over the past few years wouldn't have been possible without Elite Primary School. Teachers are amazing and considerate when addressing any concerns parents have. Their approach is very positive. All in all, I am pleased that our children are in the hands of good teachers and other members of Elite Primary School. Positive connections between parents and teachers have been shown to improve learners' academic achievement through meetings, consultation days where parents engage with different teachers of different subjects to ensure the progress of the child. I asked my child what her thought is about her school, and she said: "We get more freedom, and during recess, instead of avoiding teachers we approach them to discuss matters that we don't understand." Their relationship with teachers is incredible. Our kids are taking on more responsibilities willingly and show leadership qualities. Thanks to our teachers who stepped up to be our children's guardians and best friends.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">TM</div>
+            <div class="testimonial-avatar">PN</div>
             <div>
-              <h5>Thabo Molefe</h5>
-              <span>Parent of Grade 3 Learner</span>
+              <h5>Parent of a Grade 7 Learner</h5>
+              <span>Learner at Elite since Grade R (2019)</span>
             </div>
           </div>
         </div>
         <div class="testimonial-card">
-          <p>We are so grateful for the cultural programs at this school. Our children are learning to be proud of their heritage while receiving an excellent education.</p>
+          <p>I am Kgutso Bokang Ntsiane's father and my son started schooling at Elite Primary School from 2021 when he was doing Grade 2. I must say till this time where my son is doing Grade 7 at the same school, I'm proud to say I was seeing developments on my son on a yearly basis when going up on grades. I saw how the discipline developed from my son and how his school work improved. I really like to applaud the school for allowing the parents to interact on their children's school activities, the commitment of the teachers is amazing and I'm proud to recommend the school to anyone as the fees are reasonable too. Keep up the good work for our kids, your efforts are highly appreciated.</p>
           <div class="testimonial-author">
-            <div class="testimonial-avatar">NP</div>
+            <div class="testimonial-avatar">BN</div>
             <div>
-              <h5>Nomsa Phiri</h5>
-              <span>Parent of Grade 5 Learner</span>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card">
-          <p>The dedication of the staff is remarkable. They go above and beyond to ensure every child succeeds. Highly recommend this school!</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">SM</div>
-            <div>
-              <h5>Sipho Mabaso</h5>
-              <span>Parent of Grade 7 Learner</span>
+              <h5>Father of Kgutso Bokang Ntsiane</h5>
+              <span>Learner at Elite since Grade 2 (2021)</span>
             </div>
           </div>
         </div>
@@ -907,7 +943,7 @@
             <img src="logo.png" alt="Logo" class="footer-logo-img">
             <div class="logo-text">
               <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
-              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+              <span style="color: var(--gold); font-size: 9px;">Primary School</span>
             </div>
           </div>
           <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
@@ -925,9 +961,9 @@
         <div>
           <h4>Contact Info</h4>
           <ul class="footer-links">
-            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
-            <li><a href="#">📞 +27 (12) 000 0000</a></li>
-            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+            <li><a href="#">📍 Dinokeng, Hammanskraal</a></li>
+            <li><a href="#">📞 +27 12 711 4379</a></li>
+            <li><a href="#">✉️ info@h-elite.co.za</a></li>
           </ul>
         </div>
         <div>
@@ -936,14 +972,17 @@
             <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
             <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
             <li><a href="#">Sat - Sun: Closed</a></li>
+                        <li><a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a></li>
+            <li><a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg> TikTok</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <p>© 2024 Hammanskraal Elite Primary School. All rights reserved.</p>
         <div>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="privacy.html" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="terms.html" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="popia.html" style="color: #6b7280; margin-left: 24px;">POPIA</a>
         </div>
       </div>
     </div>
@@ -955,6 +994,39 @@
     document.getElementById('mobileMenu').classList.toggle('active');
     document.getElementById('mobileOverlay').classList.toggle('active');
   }
+
+  // Store which items are originally large
+  var largeItems = [];
+  document.querySelectorAll('.gallery-item.large').forEach(function(item) {
+    largeItems.push(item);
+  });
+
+  document.querySelectorAll('.filter-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-tab').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var filter = btn.getAttribute('data-filter');
+
+      document.querySelectorAll('.gallery-item').forEach(function(item) {
+        var match = (filter === 'all' || item.getAttribute('data-category') === filter);
+        item.style.display = match ? '' : 'none';
+        // Remove large spanning when filtering to avoid grid gaps
+        if (filter !== 'all') {
+          item.classList.remove('large');
+        }
+      });
+
+      // Restore large class when showing all photos
+      if (filter === 'all') {
+        largeItems.forEach(function(item) { item.classList.add('large'); });
+      }
+    });
+  });
   </script>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/27818878478" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 </body>
 </html>

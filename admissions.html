@@ -112,31 +112,63 @@
 
     /* Page Header */
     .page-header {
-      padding: 160px 24px 80px;
-      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
-      text-align: center;
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      margin-top: 92px;
     }
-    .page-header h1 {
-      font-size: 48px;
-      font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      color: white;
-      margin-bottom: 16px;
+    .page-header img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .page-header p {
-      font-size: 18px;
-      color: #d1d5db;
-      max-width: 600px;
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(44,62,107,0.92) 0%, rgba(44,62,107,0.75) 50%, rgba(44,62,107,0.5) 100%);
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
     }
     .breadcrumb {
-      margin-top: 24px;
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      margin-bottom: 12px;
     }
     .breadcrumb a {
       color: var(--gold);
       text-decoration: none;
+    }
+    .breadcrumb span {
+      color: rgba(255,255,255,0.4);
+      margin: 0 8px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      line-height: 1.2;
+    }
+    .page-header-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--red) 0%, var(--red) 30%, var(--gold) 30%, var(--gold) 100%);
     }
 
     /* Section Styles */
@@ -652,9 +684,8 @@
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .page-header { padding: 130px 24px 60px; }
-      .page-header h1 { font-size: 36px; }
-      .page-header p { font-size: 16px; }
+      .page-header { height: 180px; margin-top: 82px; }
+      .page-header h1 { font-size: 28px; }
       .section { padding: 60px 24px; }
       .section-title { font-size: 30px; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
@@ -669,12 +700,44 @@
       .contact-cta-inner { grid-template-columns: 1fr; text-align: center; }
     }
     @media (max-width: 640px) {
-      .page-header h1 { font-size: 28px; }
+      .page-header { height: 160px; margin-top: 76px; }
+      .page-header h1 { font-size: 26px; }
       .section-title { font-size: 26px; }
       .process-grid { grid-template-columns: 1fr; }
       .fees-banner h3 { font-size: 32px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+    /* WhatsApp Button */
+    @keyframes whatsapp-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-radius: 50%;
+      text-decoration: none;
+      animation: whatsapp-pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      background: #1ebe57;
+      transform: scale(1.1);
+      animation: none;
     }
   </style>
 </head>
@@ -686,7 +749,7 @@
         <img src="logo.png" alt="Logo" class="logo-img">
         <div class="logo-text">
           <span>Hammanskraal Elite</span>
-          <span>We Are Special</span>
+          <span>Primary School</span>
         </div>
       </a>
       <div class="nav-links">
@@ -716,6 +779,14 @@
         <a href="gallery.html">Gallery</a>
         <a href="contact.html">Contact</a>
         <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px;">
+          <a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="width: 36px; height: 36px; background: #1877F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="width: 36px; height: 36px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -723,11 +794,15 @@
 
   <!-- Page Header -->
   <header class="page-header">
-    <h1>Admissions</h1>
-    <p>Join our school family! Learn about our admission process, requirements, and fees.</p>
-    <div class="breadcrumb">
-      <a href="index.html">Home</a> / Admissions
+    <img src="campus-yard.jpg" alt="Hammanskraal Elite School Campus">
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> Admissions
+      </div>
+      <h1>Admissions</h1>
     </div>
+    <div class="page-header-bar"></div>
   </header>
 
   <!-- Admission Process -->
@@ -809,8 +884,7 @@
           <h3>R1,400 <span>/month</span></h3>
           <div class="fees-banner-options">
             <span class="fees-banner-option"><strong>Monthly:</strong> R1,400</span>
-            <span class="fees-banner-option"><strong>Termly:</strong> R4,200</span>
-            <span class="fees-banner-option"><strong>Annually:</strong> R14,000</span>
+            <span class="fees-banner-option"><strong>Annually:</strong> R15,400</span>
           </div>
         </div>
         <div class="fees-body">
@@ -841,26 +915,26 @@
         <h2 class="section-title">Application Form</h2>
       </div>
       <div class="form-container">
-        <form>
+        <form id="admissionForm">
           <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 24px;">Learner Information</h3>
           <div class="form-row">
             <div class="form-group">
               <label>First Name *</label>
-              <input type="text" required>
+              <input type="text" name="firstName" required>
             </div>
             <div class="form-group">
               <label>Last Name *</label>
-              <input type="text" required>
+              <input type="text" name="lastName" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Date of Birth *</label>
-              <input type="date" required>
+              <input type="date" name="dateOfBirth" required>
             </div>
             <div class="form-group">
               <label>Grade Applying For *</label>
-              <select required>
+              <select name="grade" required>
                 <option value="">Select Grade</option>
                 <option value="R">Grade R</option>
                 <option value="1">Grade 1</option>
@@ -878,11 +952,11 @@
           <div class="form-row">
             <div class="form-group">
               <label>Parent/Guardian Name *</label>
-              <input type="text" required>
+              <input type="text" name="parentName" required>
             </div>
             <div class="form-group">
               <label>Relationship to Learner *</label>
-              <select required>
+              <select name="relationship" required>
                 <option value="">Select Relationship</option>
                 <option value="mother">Mother</option>
                 <option value="father">Father</option>
@@ -894,20 +968,20 @@
           <div class="form-row">
             <div class="form-group">
               <label>Email Address *</label>
-              <input type="email" required>
+              <input type="email" name="email" required>
             </div>
             <div class="form-group">
               <label>Phone Number *</label>
-              <input type="tel" required>
+              <input type="tel" name="phone" required>
             </div>
           </div>
           <div class="form-group">
             <label>Home Address *</label>
-            <textarea required placeholder="Street address, suburb, city, postal code"></textarea>
+            <textarea name="address" required placeholder="Street address, suburb, city, postal code"></textarea>
           </div>
           <div class="form-group">
             <label>Additional Information</label>
-            <textarea placeholder="Any additional information you'd like to share (special needs, previous schooling, etc.)"></textarea>
+            <textarea name="additionalInfo" placeholder="Any additional information you'd like to share (special needs, previous schooling, etc.)"></textarea>
           </div>
 
           <button type="submit" class="form-submit">Submit Application</button>
@@ -933,16 +1007,133 @@
           <p class="faq-answer">School hours are from 7:30 AM to 2:30 PM, Monday to Friday. Learners are required to attend school daily and arrive before the commencement of the first period. Any absence must be substantiated by a written explanation or medical certificate from a parent/guardian. Persistent late arrivals or unexcused absenteeism will result in a formal report to the parents and potential disciplinary review. The school office is open from 7:00 AM to 4:00 PM for enquiries and administrative matters.</p>
         </div>
         <div class="faq-item">
-          <h4 class="faq-question">Do you offer after-care services?</h4>
-          <p class="faq-answer">Yes, we offer after-care services until 5:00 PM for an additional fee. This includes supervised homework time, snacks, and recreational activities.</p>
+          <h4 class="faq-question">Do you offer after-care or remedial services?</h4>
+          <p class="faq-answer">The school offers remedial lessons for learners who need additional support. Foundation Phase learners attend from 13h10 to 14h05, Monday to Thursday. Intermediate and Senior Phase learners attend on Wednesdays from 12h00 to 14h05.</p>
         </div>
         <div class="faq-item">
           <h4 class="faq-question">What is your learner-to-teacher ratio?</h4>
-          <p class="faq-answer">We maintain small class sizes with a maximum of 35 learners per class, ensuring each child receives adequate attention and support from our teachers. Learners must maintain a high level of respect for educators, support staff, and peers. Bullying, physical altercations, vandalism, and insubordination are strictly prohibited.</p>
+          <p class="faq-answer">We have 274 learners and 14 dedicated staff members across two campuses, with a maximum of 36 learners per class. This ensures each child receives adequate attention and support. Our school has 11 well-equipped classrooms. Learners must maintain a high level of respect for educators, support staff, and peers.</p>
         </div>
         <div class="faq-item">
           <h4 class="faq-question">Is there a school uniform?</h4>
-          <p class="faq-answer">Yes, the prescribed school uniform must be worn in its entirety every school day. Uniforms must be clean, pressed, and in good repair. Any temporary deviation from the uniform code requires a written explanation from a parent or guardian for administrative approval. Details about the uniform and where to purchase it will be provided upon admission.</p>
+          <p class="faq-answer">Yes, our school uniform reflects pride, discipline and unity. Uniforms are available for purchase directly at the school. Uniforms must be clean, pressed, and in good repair.</p>
+          <div class="faq-answer" style="margin-top: 12px;">
+            <p style="font-weight: bold; margin-bottom: 8px;">School Uniform Price List — 2026 (Grade RR–7):</p>
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px;">
+              <thead>
+                <tr style="background: var(--navy); color: white;">
+                  <th style="padding: 10px 12px; text-align: left;">Item</th>
+                  <th style="padding: 10px 12px; text-align: left;">Size</th>
+                  <th style="padding: 10px 12px; text-align: right;">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black &amp; Red Golf Shirt</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R220.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R240.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R260.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black &amp; Red PT Short</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R180.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R200.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R220.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black Long Sleeve Jersey</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R300.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R320.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R340.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black Pull Over</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R280.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R300.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R320.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black &amp; Red Tracksuit</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R520.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R540.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R560.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;"><strong>Drymac</strong></td>
+                  <td style="padding: 8px 12px;">All sizes</td>
+                  <td style="padding: 8px 12px; text-align: right;">R350.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;" rowspan="3"><strong>Tunic (Girls)</strong></td>
+                  <td style="padding: 8px 12px;">24–28</td>
+                  <td style="padding: 8px 12px; text-align: right;">R370.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">30–34</td>
+                  <td style="padding: 8px 12px; text-align: right;">R390.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;">36–40</td>
+                  <td style="padding: 8px 12px; text-align: right;">R400.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;"><strong>Tie (Black &amp; Red)</strong></td>
+                  <td style="padding: 8px 12px;">One size</td>
+                  <td style="padding: 8px 12px; text-align: right;">R100.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;"><strong>Black Beanie</strong></td>
+                  <td style="padding: 8px 12px;">One size</td>
+                  <td style="padding: 8px 12px; text-align: right;">R80.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
+                  <td style="padding: 8px 12px;"><strong>Black &amp; Red Socks</strong></td>
+                  <td style="padding: 8px 12px;">S / M / L</td>
+                  <td style="padding: 8px 12px; text-align: right;">R80.00</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e5e7eb;">
+                  <td style="padding: 8px 12px;"><strong>Bucket Hat</strong></td>
+                  <td style="padding: 8px 12px;">One size</td>
+                  <td style="padding: 8px 12px; text-align: right;">R100.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -956,15 +1147,15 @@
         <p>Our admissions team is here to help you through the process. Contact us for any questions or to schedule a school visit.</p>
         <div class="contact-info-item">
           <span>📞</span>
-          <span>+27 (12) 000 0000</span>
+          <span>+27 12 711 4379</span>
         </div>
         <div class="contact-info-item">
           <span>✉️</span>
-          <span>admissions@hammanskraalelite.co.za</span>
+          <span>info@h-elite.co.za</span>
         </div>
         <div class="contact-info-item">
           <span>📍</span>
-          <span>Hammanskraal, Gauteng, South Africa</span>
+          <span>Dinokeng Game Reserve, Hammanskraal, Gauteng</span>
         </div>
       </div>
       <div style="text-align: center;">
@@ -982,7 +1173,7 @@
             <img src="logo.png" alt="Logo" class="footer-logo-img">
             <div class="logo-text">
               <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
-              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+              <span style="color: var(--gold); font-size: 9px;">Primary School</span>
             </div>
           </div>
           <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
@@ -1000,9 +1191,9 @@
         <div>
           <h4>Contact Info</h4>
           <ul class="footer-links">
-            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
-            <li><a href="#">📞 +27 (12) 000 0000</a></li>
-            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+            <li><a href="#">📍 Dinokeng, Hammanskraal</a></li>
+            <li><a href="#">📞 +27 12 711 4379</a></li>
+            <li><a href="#">✉️ info@h-elite.co.za</a></li>
           </ul>
         </div>
         <div>
@@ -1011,14 +1202,17 @@
             <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
             <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
             <li><a href="#">Sat - Sun: Closed</a></li>
+                        <li><a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a></li>
+            <li><a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg> TikTok</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <p>© 2024 Hammanskraal Elite Primary School. All rights reserved.</p>
         <div>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="privacy.html" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="terms.html" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="popia.html" style="color: #6b7280; margin-left: 24px;">POPIA</a>
         </div>
       </div>
     </div>
@@ -1030,6 +1224,56 @@
     document.getElementById('mobileMenu').classList.toggle('active');
     document.getElementById('mobileOverlay').classList.toggle('active');
   }
+
+  document.getElementById('admissionForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var form = e.target;
+    var submitBtn = form.querySelector('.form-submit');
+    var originalText = submitBtn.textContent;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+    submitBtn.style.opacity = '0.7';
+
+    var formData = new FormData(form);
+    var data = Object.fromEntries(formData.entries());
+
+    try {
+      var response = await fetch('/api/send-application', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      var result = await response.json();
+
+      if (response.ok && result.success) {
+        submitBtn.textContent = 'Application Submitted!';
+        submitBtn.style.background = '#16a34a';
+        form.reset();
+        setTimeout(function() {
+          submitBtn.textContent = originalText;
+          submitBtn.style.background = '';
+          submitBtn.style.opacity = '';
+          submitBtn.disabled = false;
+        }, 4000);
+      } else {
+        alert(result.error || 'Something went wrong. Please try again.');
+        submitBtn.textContent = originalText;
+        submitBtn.style.opacity = '';
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      alert('Could not submit the application. Please check your internet connection and try again.');
+      submitBtn.textContent = originalText;
+      submitBtn.style.opacity = '';
+      submitBtn.disabled = false;
+    }
+  });
   </script>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/27818878478" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 </body>
 </html>

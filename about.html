@@ -112,43 +112,63 @@
 
     /* Page Header */
     .page-header {
-      padding: 160px 24px 80px;
-      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
-      text-align: center;
       position: relative;
+      height: 220px;
       overflow: hidden;
+      display: flex;
+      align-items: center;
+      margin-top: 92px;
     }
-    .page-header::before {
-      content: '';
+    .page-header img {
       position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      border: 2px solid rgba(184, 134, 11, 0.1);
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .page-header h1 {
-      font-size: 48px;
-      font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      color: white;
-      margin-bottom: 16px;
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(44,62,107,0.92) 0%, rgba(44,62,107,0.75) 50%, rgba(44,62,107,0.5) 100%);
     }
-    .page-header p {
-      font-size: 18px;
-      color: #d1d5db;
-      max-width: 600px;
+    .page-header-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
     }
     .breadcrumb {
-      margin-top: 24px;
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      margin-bottom: 12px;
     }
     .breadcrumb a {
       color: var(--gold);
       text-decoration: none;
+    }
+    .breadcrumb span {
+      color: rgba(255,255,255,0.4);
+      margin: 0 8px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      line-height: 1.2;
+    }
+    .page-header-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--red) 0%, var(--red) 30%, var(--gold) 30%, var(--gold) 100%);
     }
 
     /* Section Styles */
@@ -587,9 +607,8 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .page-header { padding: 130px 24px 60px; }
-      .page-header h1 { font-size: 36px; }
-      .page-header p { font-size: 16px; }
+      .page-header { height: 180px; margin-top: 82px; }
+      .page-header h1 { font-size: 28px; }
       .section { padding: 60px 24px; }
       .section-title { font-size: 30px; }
       .story-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -608,13 +627,45 @@
       .timeline-year { font-size: 36px; }
     }
     @media (max-width: 640px) {
-      .page-header h1 { font-size: 28px; }
+      .page-header { height: 160px; margin-top: 76px; }
+      .page-header h1 { font-size: 26px; }
       .section-title { font-size: 26px; }
       .values-grid { grid-template-columns: 1fr; }
       .stats-grid { grid-template-columns: 1fr; gap: 32px; }
       .stat-item h3 { font-size: 40px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+    }
+    /* WhatsApp Button */
+    @keyframes whatsapp-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70% { box-shadow: 0 0 0 16px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-radius: 50%;
+      text-decoration: none;
+      animation: whatsapp-pulse 2s infinite;
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+      background: #1ebe57;
+      transform: scale(1.1);
+      animation: none;
     }
   </style>
 </head>
@@ -626,7 +677,7 @@
         <img src="logo.png" alt="Logo" class="logo-img">
         <div class="logo-text">
           <span>Hammanskraal Elite</span>
-          <span>We Are Special</span>
+          <span>Primary School</span>
         </div>
       </a>
       <div class="nav-links">
@@ -656,6 +707,14 @@
         <a href="gallery.html">Gallery</a>
         <a href="contact.html">Contact</a>
         <a href="admissions.html" class="mobile-cta">Enrol Now</a>
+        <div style="display: flex; gap: 16px; justify-content: center; margin-top: 16px;">
+          <a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="width: 36px; height: 36px; background: #1877F2; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="width: 36px; height: 36px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -663,11 +722,15 @@
 
   <!-- Page Header -->
   <header class="page-header">
-    <h1>About Our School</h1>
-    <p>Discover the story, mission, and values that make Hammanskraal Elite School a special place for learning and growth.</p>
-    <div class="breadcrumb">
-      <a href="index.html">Home</a> / About Us
+    <img src="school-front.jpg" alt="Hammanskraal Elite School">
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a> <span>/</span> About Us
+      </div>
+      <h1>About Our School</h1>
     </div>
+    <div class="page-header-bar"></div>
   </header>
 
   <!-- Our Story -->
@@ -678,13 +741,13 @@
           <p class="section-tag">Our Story</p>
           <h2 class="section-title">A Legacy of Excellence in Education</h2>
           <p>
-            Hammanskraal Elite School was founded with a simple yet powerful vision: to provide quality education to every child in our community, regardless of their background. From humble beginnings, we have grown into a beacon of academic excellence in Gauteng.
+            Hammanskraal Elite School was established in January 2000 by Mrs Esme Penaar with just 30 learners from Grade 1 to 7. In September 2010, Mr Eric Semenya acquired the school and by January 2014, it had grown into a well-established institution.
           </p>
           <p>
-            Our journey began over 15 years ago when a group of dedicated educators came together with a shared dream. They believed that every child deserves access to quality education, and that belief continues to guide everything we do today.
+            Due to growing numbers, a new campus was leased to accommodate the Intermediate and Senior Phase (Grade 4–7), while the original campus remained dedicated to the Foundation Phase (Grade R–3) with 8 classrooms. Both campuses are uniquely situated within the Dinokeng Game Reserve, where learners experience the tranquility of nature and can spot the Big 5 on their way to school.
           </p>
           <p>
-            Today, we are proud to be one of the leading primary schools in Hammanskraal, known for our commitment to academic excellence, character development, and celebrating our rich South African heritage.
+            Today, with 274 learners and 14 dedicated staff members across two campuses, we continue our mission of providing quality education in one of the most unique school settings in Gauteng. Our commitment to academic excellence, character development, and celebrating our rich South African heritage remains at the heart of everything we do.
           </p>
         </div>
         <div class="story-image">
@@ -724,29 +787,26 @@
     <div class="section-inner">
       <div class="principal-grid">
         <div class="principal-image">
-          <img src="culture-graduation.jpg" alt="Principal">
+          <img src="principal.jpg" alt="Miss Kunene Nelly Precious - School Principal">
           <div class="principal-image-frame"></div>
         </div>
         <div class="principal-content">
           <p class="section-tag">Principal's Message</p>
-          <h3>Welcome to Our School Family</h3>
+          <h3>Miss Kunene Nelly Precious</h3>
           <p class="title">School Principal</p>
           <p>
-            Dear Parents and Learners,
+            Welcome to Hammanskraal Elite Primary School.
           </p>
           <p>
-            It is with great pride and joy that I welcome you to Hammanskraal Elite School. Our school is more than just a place of learning – it is a community where every child is valued, nurtured, and encouraged to reach their full potential.
+            We are delighted to welcome you to our school community. At our school, we believe that every learner is unique and capable of achieving great success when supported by dedicated educators, caring parents and a positive learning environment.
           </p>
           <p>
-            At Hammanskraal Elite, we believe that education is the most powerful tool we can give our children. We are committed to providing a safe, supportive, and stimulating environment where learners can grow academically, socially, and emotionally.
+            We are committed to providing quality education that nurtures academic excellence, strong values, discipline and confidence in every child. We take pride in creating a safe, inclusive and inspiring space where learners are encouraged to explore their talents, develop their skills, and grow into responsible future leaders.
           </p>
           <p>
-            Our dedicated team of educators works tirelessly to ensure that every child receives the attention and support they need to succeed. We celebrate our South African heritage and instill values of Ubuntu, respect, and integrity in all our learners.
+            Together with parents and stakeholders, we continue to build a strong partnership that ensures the success and well-being of all our learners. We warmly invite you to be part of our journey as we work together to shape bright futures.
           </p>
-          <p>
-            I invite you to join our school family and experience the difference that quality education can make in your child's life.
-          </p>
-          <p class="principal-signature">— The Principal</p>
+          <p class="principal-signature">— Miss K.N. Precious</p>
         </div>
       </div>
     </div>
@@ -804,41 +864,33 @@
       <div class="timeline">
         <div class="timeline-item">
           <div class="timeline-content">
-            <div class="timeline-year">2008</div>
+            <div class="timeline-year">2000</div>
             <h4 class="timeline-title">School Founded</h4>
-            <p class="timeline-desc">Hammanskraal Elite School opened its doors with a small group of dedicated educators and eager learners.</p>
+            <p class="timeline-desc">Hammanskraal Elite School was established in January 2000 by Mrs Esme Penaar with 30 learners from Grade 1 to 7.</p>
           </div>
           <div class="timeline-dot"></div>
         </div>
         <div class="timeline-item">
           <div class="timeline-content">
-            <div class="timeline-year">2012</div>
+            <div class="timeline-year">2010</div>
+            <h4 class="timeline-title">New Ownership</h4>
+            <p class="timeline-desc">In September 2010, Mr Eric Semenya acquired the school, bringing new vision and leadership to drive its growth.</p>
+          </div>
+          <div class="timeline-dot"></div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-year">2014</div>
             <h4 class="timeline-title">Campus Expansion</h4>
-            <p class="timeline-desc">New classrooms and facilities were added to accommodate our growing number of learners.</p>
+            <p class="timeline-desc">The school became well-established with over 300 learners. A second campus was leased to accommodate the Intermediate and Senior Phase.</p>
           </div>
           <div class="timeline-dot"></div>
         </div>
         <div class="timeline-item">
           <div class="timeline-content">
-            <div class="timeline-year">2016</div>
-            <h4 class="timeline-title">Academic Recognition</h4>
-            <p class="timeline-desc">Our school received recognition for outstanding academic performance in the district.</p>
-          </div>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <div class="timeline-year">2020</div>
-            <h4 class="timeline-title">Digital Learning</h4>
-            <p class="timeline-desc">Introduced digital learning tools and technology to enhance our educational offerings.</p>
-          </div>
-          <div class="timeline-dot"></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-content">
-            <div class="timeline-year">2024</div>
+            <div class="timeline-year">2026</div>
             <h4 class="timeline-title">Continuing Excellence</h4>
-            <p class="timeline-desc">Today, we continue our mission to provide quality education and nurture future leaders.</p>
+            <p class="timeline-desc">Today, with 274 learners, 14 dedicated staff, and 11 well-equipped classrooms across two campuses in the Dinokeng Game Reserve, we continue shaping bright futures.</p>
           </div>
           <div class="timeline-dot"></div>
         </div>
@@ -850,20 +902,20 @@
   <section class="stats-section">
     <div class="stats-grid">
       <div class="stat-item">
-        <h3>15+</h3>
+        <h3>25+</h3>
         <p>Years of Excellence</p>
       </div>
       <div class="stat-item">
-        <h3>500+</h3>
+        <h3>274</h3>
         <p>Happy Learners</p>
       </div>
       <div class="stat-item">
-        <h3>30+</h3>
-        <p>Dedicated Teachers</p>
+        <h3>14</h3>
+        <p>Dedicated Staff</p>
       </div>
       <div class="stat-item">
-        <h3>95%</h3>
-        <p>Parent Satisfaction</p>
+        <h3>2</h3>
+        <p>Campuses</p>
       </div>
     </div>
   </section>
@@ -877,7 +929,7 @@
             <img src="logo.png" alt="Logo" class="footer-logo-img">
             <div class="logo-text">
               <span style="color: white; font-size: 16px;">Hammanskraal Elite</span>
-              <span style="color: var(--gold); font-size: 9px;">We Are Special</span>
+              <span style="color: var(--gold); font-size: 9px;">Primary School</span>
             </div>
           </div>
           <p class="footer-desc">Dedicated to providing a safe, nurturing, and supportive learning environment, underpinned by transparent communication and excellence in teaching.</p>
@@ -895,9 +947,9 @@
         <div>
           <h4>Contact Info</h4>
           <ul class="footer-links">
-            <li><a href="#">📍 Hammanskraal, Gauteng</a></li>
-            <li><a href="#">📞 +27 (12) 000 0000</a></li>
-            <li><a href="#">✉️ info@hammanskraalelite.co.za</a></li>
+            <li><a href="#">📍 Dinokeng, Hammanskraal</a></li>
+            <li><a href="#">📞 +27 12 711 4379</a></li>
+            <li><a href="#">✉️ info@h-elite.co.za</a></li>
           </ul>
         </div>
         <div>
@@ -906,14 +958,17 @@
             <li><a href="#">Mon - Fri: 7:30 AM - 2:30 PM</a></li>
             <li><a href="#">Office: 7:00 AM - 4:00 PM</a></li>
             <li><a href="#">Sat - Sun: Closed</a></li>
+                        <li><a href="https://www.facebook.com/share/16LRw5aoFe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</a></li>
+            <li><a href="https://vm.tiktok.com/ZS9dC3tyoV1SK-hKMZe/" target="_blank" style="display: inline-flex; align-items: center; gap: 6px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48v-7.15a8.16 8.16 0 005.58 2.2v-3.4a4.85 4.85 0 01-1.99-.44 4.84 4.84 0 01-1.99-1.8 3.47 3.47 0 003.98-2.4z"/></svg> TikTok</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Hammanskraal Elite School. We Are Special.</p>
+        <p>© 2024 Hammanskraal Elite Primary School. All rights reserved.</p>
         <div>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Privacy</a>
-          <a href="#" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="privacy.html" style="color: #6b7280; margin-left: 24px;">Privacy</a>
+          <a href="terms.html" style="color: #6b7280; margin-left: 24px;">Terms</a>
+          <a href="popia.html" style="color: #6b7280; margin-left: 24px;">POPIA</a>
         </div>
       </div>
     </div>
@@ -926,5 +981,10 @@
     document.getElementById('mobileOverlay').classList.toggle('active');
   }
   </script>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/27818878478" target="_blank" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 </body>
 </html>

@@ -111,31 +111,62 @@
 
     /* Page Header */
     .page-header {
-      padding: 160px 24px 80px;
-      background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
-      text-align: center;
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
     }
-    .page-header h1 {
-      font-size: 48px;
-      font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      color: white;
-      margin-bottom: 16px;
+    .page-header img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .page-header p {
-      font-size: 18px;
-      color: #d1d5db;
-      max-width: 600px;
+    .page-header-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.5), transparent);
+    }
+    .page-header-content {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 24px;
+      width: 100%;
     }
     .breadcrumb {
-      margin-top: 24px;
       font-size: 12px;
-      color: #9ca3af;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: bold;
+      margin-bottom: 12px;
     }
     .breadcrumb a {
       color: var(--gold);
       text-decoration: none;
+    }
+    .breadcrumb span {
+      color: rgba(255,255,255,0.4);
+      margin: 0 8px;
+    }
+    .page-header h1 {
+      font-size: 34px;
+      font-family: 'Playfair Display', serif;
+      font-weight: bold;
+      color: white;
+      line-height: 1.2;
+    }
+    .page-header-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--red) 0%, var(--red) 30%, var(--gold) 30%, var(--gold) 100%);
     }
 
     /* Section Styles */
@@ -313,29 +344,36 @@
 
     /* Map Section */
     .map-section {
-      height: 450px;
-      background: #e5e7eb;
-      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 300px;
     }
-    .map-placeholder {
-      width: 100%;
-      height: 100%;
+    .map-info {
       background: linear-gradient(135deg, var(--navy) 0%, #2a3a5a 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       text-align: center;
+      padding: 48px 32px;
     }
-    .map-placeholder h3 {
+    .map-info h3 {
       font-family: 'Playfair Display', serif;
       font-size: 32px;
       margin-bottom: 16px;
     }
-    .map-placeholder p {
+    .map-info p {
       color: #9ca3af;
       max-width: 400px;
       line-height: 1.7;
+    }
+    .map-image {
+      overflow: hidden;
+    }
+    .map-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     /* Quick Contact Cards */
@@ -617,9 +655,8 @@
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .page-header { padding: 130px 24px 60px; }
-      .page-header h1 { font-size: 36px; }
-      .page-header p { font-size: 16px; }
+      .page-header { height: 260px; }
+      .page-header h1 { font-size: 28px; }
       .section { padding: 60px 24px; }
       .section-title { font-size: 30px; }
       .contact-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -630,11 +667,13 @@
       .hours-grid { grid-template-columns: 1fr; gap: 40px; }
       .hours-table { grid-template-columns: 1fr; }
       .hours-content h2 { font-size: 28px; }
-      .map-section { height: 300px; }
+      .map-section { grid-template-columns: 1fr; }
+      .map-image { height: 300px; }
       .faq-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
-      .page-header h1 { font-size: 28px; }
+      .page-header { height: 240px; }
+      .page-header h1 { font-size: 26px; }
       .section-title { font-size: 26px; }
       .quick-contact-grid { grid-template-columns: 1fr; margin-top: -20px; }
       .contact-icon { width: 48px; height: 48px; font-size: 20px; }
@@ -646,13 +685,13 @@
       .logo-text span:first-child { font-size: 16px; }
       .logo-text span:last-child { font-size: 9px; }
       .navbar-inner { padding: 0 16px; }
-      .page-header { padding: 100px 16px 40px; }
-      .page-header h1 { font-size: 24px; }
+      .page-header { height: 200px; }
+      .page-header h1 { font-size: 22px; }
       .section { padding: 40px 16px; }
       .section-title { font-size: 22px; }
       .contact-form { padding: 24px; }
       .contact-icon { width: 40px; height: 40px; font-size: 18px; }
-      .map-section { height: 220px; }
+      .map-image { height: 220px; }
       .footer { padding: 48px 16px 32px; }
       .footer-grid { gap: 40px; }
       .whatsapp-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; }
@@ -744,11 +783,15 @@
 
   <!-- Page Header -->
   <header class="page-header">
-    <h1>Contact Us</h1>
-    <p>We'd love to hear from you. Get in touch with us for any enquiries about our school.</p>
-    <div class="breadcrumb">
-      <a href="/">Home</a> / Contact
+    <img src="contact-hero.jpg" alt="Contact Us">
+    <div class="page-header-overlay"></div>
+    <div class="page-header-content">
+      <div class="breadcrumb">
+        <a href="/">Home</a> <span>/</span> Contact
+      </div>
+      <h1>Contact Us</h1>
     </div>
+    <div class="page-header-bar"></div>
   </header>
 
   <!-- Contact Section -->
@@ -851,11 +894,14 @@
 
   <!-- Map Section -->
   <section class="map-section">
-    <div class="map-placeholder">
+    <div class="map-info">
       <div>
         <h3>📍 Find Us</h3>
         <p>Hammanskraal Elite Primary School<br>Rust De Winter Rd, Welgevonden JR 93/57<br>Dinokeng, 0400, Pretoria</p>
       </div>
+    </div>
+    <div class="map-image">
+      <img src="school-map.png" alt="School Location - Satellite View">
     </div>
   </section>
 

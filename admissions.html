@@ -690,6 +690,7 @@
       .process-grid { grid-template-columns: repeat(2, 1fr); }
       .process-step::after { display: none; }
       .requirements-grid { grid-template-columns: 1fr; }
+      #apply > .section-inner > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       .form-container { padding: 32px; }
       .fees-banner { padding: 32px 24px; }
@@ -898,7 +899,7 @@
       </div>
       <div class="fees-section">
         <div class="fees-banner">
-          <p class="fees-banner-label">Grade R – Grade 7 · 2026</p>
+          <p class="fees-banner-label">Grade RR – Grade 7 · 2026</p>
           <h3>R1,400 <span>/month</span></h3>
           <div class="fees-banner-options">
             <span class="fees-banner-option"><strong>Monthly:</strong> R1,400</span>
@@ -928,83 +929,49 @@
   <!-- Application Form -->
   <section class="section section-gray" id="apply">
     <div class="section-inner">
-      <div style="text-align: center; margin-bottom: 60px;">
+      <div style="text-align: center; margin-bottom: 48px;">
         <p class="section-tag">Start Your Journey</p>
-        <h2 class="section-title">Application Form</h2>
+        <h2 class="section-title">Apply for Admission &mdash; 2027</h2>
+        <p style="color: #6b7280; max-width: 640px; margin: 16px auto 0; line-height: 1.6;">Choose how you'd like to apply. Both options collect the same information &mdash; signed copies of the form, certified documents and banking details are completed in person at the school office.</p>
       </div>
-      <div class="form-container">
-        <form id="admissionForm">
-          <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 24px;">Learner Information</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <label>First Name *</label>
-              <input type="text" name="firstName" required>
-            </div>
-            <div class="form-group">
-              <label>Last Name *</label>
-              <input type="text" name="lastName" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Date of Birth *</label>
-              <input type="date" name="dateOfBirth" required>
-            </div>
-            <div class="form-group">
-              <label>Grade Applying For *</label>
-              <select name="grade" required>
-                <option value="">Select Grade</option>
-                <option value="R">Grade R</option>
-                <option value="1">Grade 1</option>
-                <option value="2">Grade 2</option>
-                <option value="3">Grade 3</option>
-                <option value="4">Grade 4</option>
-                <option value="5">Grade 5</option>
-                <option value="6">Grade 6</option>
-                <option value="7">Grade 7</option>
-              </select>
-            </div>
-          </div>
 
-          <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); margin: 40px 0 24px;">Parent/Guardian Information</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Parent/Guardian Name *</label>
-              <input type="text" name="parentName" required>
-            </div>
-            <div class="form-group">
-              <label>Relationship to Learner *</label>
-              <select name="relationship" required>
-                <option value="">Select Relationship</option>
-                <option value="mother">Mother</option>
-                <option value="father">Father</option>
-                <option value="guardian">Legal Guardian</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
+      <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Apply Online -->
+        <a href="/apply" style="text-decoration: none; color: inherit; display: flex;">
+          <div style="background: white; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--red); display: flex; flex-direction: column; gap: 16px; flex: 1; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+            <div style="display: inline-flex; padding: 6px 12px; background: rgba(204,85,0,0.1); color: var(--red); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; align-self: flex-start;">Recommended</div>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); font-size: 24px;">Apply Online</h3>
+            <p style="color: #6b7280; font-size: 14px; line-height: 1.7;">Complete the full admission form on your device, in 6 quick steps. Your progress is saved automatically &mdash; come back later to finish if you need to.</p>
+            <ul style="list-style: none; padding: 0; margin: 0; color: #4b5563; font-size: 13px; line-height: 1.9;">
+              <li style="display: flex; gap: 8px;"><span style="color: var(--red); font-weight: bold;">✓</span> All sections from the official form</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--red); font-weight: bold;">✓</span> Saves automatically as you type</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--red); font-weight: bold;">✓</span> Mobile-friendly &mdash; takes ~15 minutes</li>
+            </ul>
+            <span style="background: var(--red); color: white; padding: 14px 24px; text-align: center; text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 0.1em; margin-top: auto;">Start Online Application &rarr;</span>
           </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Email Address *</label>
-              <input type="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label>Phone Number *</label>
-              <input type="tel" name="phone" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Home Address *</label>
-            <textarea name="address" required placeholder="Street address, suburb, city, postal code"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Additional Information</label>
-            <textarea name="additionalInfo" placeholder="Any additional information you'd like to share (special needs, previous schooling, etc.)"></textarea>
-          </div>
+        </a>
 
-          <button type="submit" class="form-submit">Submit Application</button>
-        </form>
+        <!-- Download PDF -->
+        <a href="/forms/admission-form-2027.pdf" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: flex;">
+          <div style="background: white; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--navy); display: flex; flex-direction: column; gap: 16px; flex: 1; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+            <div style="display: inline-flex; padding: 6px 12px; background: rgba(44,62,107,0.1); color: var(--navy); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; align-self: flex-start;">Print &amp; bring in</div>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); font-size: 24px;">Download PDF Form</h3>
+            <p style="color: #6b7280; font-size: 14px; line-height: 1.7; flex: 1;">Print the full 3-page application form, complete it in black pen with all signatures, and either e-mail the completed form to <strong style="color: var(--navy);">info@h-elite.co.za</strong> or bring it to the school office with your supporting documents.</p>
+            <ul style="list-style: none; padding: 0; margin: 0; color: #4b5563; font-size: 13px; line-height: 1.9;">
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Certified copy of learner's birth certificate</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Certified copy of parent/guardian ID</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Proof of residence (utility bill or lease)</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Previous school reports (if applicable)</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Transfer card from previous school (if applicable)</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Immunization records</li>
+              <li style="display: flex; gap: 8px;"><span style="color: var(--navy); font-weight: bold;">✓</span> Two recent passport-size photos</li>
+            </ul>
+            <span style="background: var(--navy); color: white; padding: 14px 24px; text-align: center; text-transform: uppercase; font-size: 12px; font-weight: bold; letter-spacing: 0.1em; margin-top: 8px;">↓ Download Form (PDF)</span>
+          </div>
+        </a>
       </div>
+
+      <p style="text-align: center; color: #6b7280; font-size: 13px; margin-top: 32px;">Need help? <a href="/contact" style="color: var(--red); font-weight: bold;">Contact the admissions office</a> &mdash; we'll guide you through the process.</p>
     </div>
   </section>
 
@@ -1036,7 +1003,7 @@
           <h4 class="faq-question">Is there a school uniform?</h4>
           <p class="faq-answer">Yes, our school uniform reflects pride, discipline and unity. Uniforms are available for purchase directly at the school. Uniforms must be clean, pressed, and in good repair.</p>
           <div class="faq-answer" style="margin-top: 12px;">
-            <p style="font-weight: bold; margin-bottom: 8px;">School Uniform Price List — 2026 (Grade RR–7):</p>
+            <p style="font-weight: bold; margin-bottom: 8px;">School Uniform Price List — 2027 (Grade RR–7):</p>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 8px;">
               <thead>
                 <tr style="background: var(--navy); color: white;">
@@ -1047,17 +1014,13 @@
               </thead>
               <tbody>
                 <tr style="border-bottom: 1px solid #e5e7eb;">
-                  <td style="padding: 8px 12px;" rowspan="3"><strong>Black &amp; Red Golf Shirt</strong></td>
+                  <td style="padding: 8px 12px;" rowspan="2"><strong>Black &amp; Red Golf Shirt</strong></td>
                   <td style="padding: 8px 12px;">24–28</td>
                   <td style="padding: 8px 12px; text-align: right;">R220.00</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e5e7eb;">
                   <td style="padding: 8px 12px;">30–34</td>
                   <td style="padding: 8px 12px; text-align: right;">R240.00</td>
-                </tr>
-                <tr style="border-bottom: 1px solid #e5e7eb;">
-                  <td style="padding: 8px 12px;">36–40</td>
-                  <td style="padding: 8px 12px; text-align: right;">R260.00</td>
                 </tr>
                 <tr style="border-bottom: 1px solid #e5e7eb; background: #fafafa;">
                   <td style="padding: 8px 12px;" rowspan="3"><strong>Black &amp; Red PT Short</strong></td>
@@ -1151,6 +1114,9 @@
                 </tr>
               </tbody>
             </table>
+            <p style="margin-top: 16px; font-size: 13px;">
+              <a href="/forms/uniform-price-list-2027.pdf" target="_blank" rel="noopener" style="color: var(--red); text-decoration: none; font-weight: bold;">↓ Download price list (PDF)</a>
+            </p>
           </div>
         </div>
       </div>
@@ -1219,51 +1185,6 @@
     document.getElementById('mobileMenu').classList.toggle('active');
     document.getElementById('mobileOverlay').classList.toggle('active');
   }
-
-  document.getElementById('admissionForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var form = e.target;
-    var submitBtn = form.querySelector('.form-submit');
-    var originalText = submitBtn.textContent;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-    submitBtn.style.opacity = '0.7';
-
-    var formData = new FormData(form);
-    var data = Object.fromEntries(formData.entries());
-
-    try {
-      var response = await fetch('/api/send-application', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      var result = await response.json();
-
-      if (response.ok && result.success) {
-        submitBtn.textContent = 'Application Submitted!';
-        submitBtn.style.background = '#16a34a';
-        form.reset();
-        setTimeout(function() {
-          submitBtn.textContent = originalText;
-          submitBtn.style.background = '';
-          submitBtn.style.opacity = '';
-          submitBtn.disabled = false;
-        }, 4000);
-      } else {
-        alert(result.error || 'Something went wrong. Please try again.');
-        submitBtn.textContent = originalText;
-        submitBtn.style.opacity = '';
-        submitBtn.disabled = false;
-      }
-    } catch (err) {
-      alert('Could not submit the application. Please check your internet connection and try again.');
-      submitBtn.textContent = originalText;
-      submitBtn.style.opacity = '';
-      submitBtn.disabled = false;
-    }
-  });
   </script>
 
   <!-- WhatsApp Button -->

@@ -191,13 +191,17 @@
       .hamburger { display: flex; }
       .footer-grid { grid-template-columns: repeat(2, 1fr); }
     }
+    /* Split-screen on FullHD desktops (~960px) — switch stepper to compact mode */
+    @media (max-width: 900px) {
+      .stepper { padding: 20px 24px; }
+      .stepper-bar { display: none; }
+      .stepper-mobile { display: block; }
+    }
     @media (max-width: 768px) {
       .page-header { height: 220px; }
       .page-header h1 { font-size: 28px; }
       .apply-wrap { margin-top: -30px; padding: 0 16px; margin-bottom: 48px; }
       .stepper { padding: 18px 20px; }
-      .stepper-bar { display: none; }
-      .stepper-mobile { display: block; }
       .step-card { padding: 28px 20px; }
       .step-card h2 { font-size: 22px; }
       .step-card .step-intro { font-size: 13px; }

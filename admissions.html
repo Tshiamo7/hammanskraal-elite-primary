@@ -388,6 +388,36 @@
       .fees-cta { flex-direction: column; text-align: center; }
     }
 
+    /* Apply CTA cards (Apply Online + Download PDF) */
+    .apply-cta-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .apply-cta-grid > a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+    }
+    .apply-cta-card {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .apply-cta-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .apply-cta-card.is-online { border-top: 4px solid var(--red); }
+    .apply-cta-card.is-pdf { border-top: 4px solid var(--navy); }
+
     /* Application Form */
     .form-container {
       max-width: 800px;
@@ -690,7 +720,8 @@
       .process-grid { grid-template-columns: repeat(2, 1fr); }
       .process-step::after { display: none; }
       .requirements-grid { grid-template-columns: 1fr; }
-      #apply > .section-inner > div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .apply-cta-grid { grid-template-columns: 1fr; gap: 16px; }
+      .apply-cta-card { padding: 32px 24px; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       .form-container { padding: 32px; }
       .fees-banner { padding: 32px 24px; }
@@ -722,6 +753,7 @@
       .fees-banner h3 { font-size: 26px; }
       .fees-banner { padding: 24px 16px; }
       .form-container { padding: 24px; }
+      .apply-cta-card { padding: 24px 18px; }
       .footer { padding: 48px 16px 32px; }
       .footer-grid { gap: 40px; }
       .whatsapp-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; }
@@ -935,10 +967,10 @@
         <p style="color: #6b7280; max-width: 640px; margin: 16px auto 0; line-height: 1.6;">Choose how you'd like to apply. Both options collect the same information &mdash; signed copies of the form, certified documents and banking details are completed in person at the school office.</p>
       </div>
 
-      <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+      <div class="apply-cta-grid">
         <!-- Apply Online -->
-        <a href="/apply" style="text-decoration: none; color: inherit; display: flex;">
-          <div style="background: white; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--red); display: flex; flex-direction: column; gap: 16px; flex: 1; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+        <a href="/apply">
+          <div class="apply-cta-card is-online">
             <div style="display: inline-flex; padding: 6px 12px; background: rgba(204,85,0,0.1); color: var(--red); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; align-self: flex-start;">Recommended</div>
             <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); font-size: 24px;">Apply Online</h3>
             <p style="color: #6b7280; font-size: 14px; line-height: 1.7;">Complete the full admission form on your device, in 6 quick steps. Your progress is saved automatically &mdash; come back later to finish if you need to.</p>
@@ -952,8 +984,8 @@
         </a>
 
         <!-- Download PDF -->
-        <a href="/forms/admission-form-2027.pdf" target="_blank" rel="noopener" style="text-decoration: none; color: inherit; display: flex;">
-          <div style="background: white; padding: 40px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--navy); display: flex; flex-direction: column; gap: 16px; flex: 1; transition: transform 0.2s ease, box-shadow 0.2s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 30px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.05)';">
+        <a href="/forms/admission-form-2027.pdf" target="_blank" rel="noopener">
+          <div class="apply-cta-card is-pdf">
             <div style="display: inline-flex; padding: 6px 12px; background: rgba(44,62,107,0.1); color: var(--navy); font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; align-self: flex-start;">Print &amp; bring in</div>
             <h3 style="font-family: 'Playfair Display', serif; color: var(--navy); font-size: 24px;">Download PDF Form</h3>
             <p style="color: #6b7280; font-size: 14px; line-height: 1.7; flex: 1;">Print the full 3-page application form, complete it in black pen with all signatures, and either e-mail the completed form to <strong style="color: var(--navy);">info@h-elite.co.za</strong> or bring it to the school office with your supporting documents.</p>

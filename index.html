@@ -716,6 +716,20 @@
       .whatsapp-btn { bottom: 16px; right: 16px; width: 48px; height: 48px; }
       .mobile-menu-inner { padding: 8px 16px 16px; }
     }
+    /* Short viewports — split-screen panes, landscape phones, small windows.
+       Keyed on height so it applies to any device, not a specific phone. */
+    @media (max-height: 600px) {
+      .hero { height: auto; min-height: 100dvh; align-items: flex-start; }
+      .hero-content { margin-top: 80px; padding-top: 8px; padding-bottom: 32px; }
+      .hero-tag { font-size: 11px; letter-spacing: 0.25em; margin-bottom: 10px; }
+      .hero h1 { font-size: 28px; margin-bottom: 14px; }
+      .hero h1 br { display: none; }
+      .hero-desc { font-size: 13px; line-height: 1.5; margin-bottom: 20px; }
+      .hero-buttons { gap: 12px; }
+      .hero-buttons a { padding: 12px 24px; font-size: 11px; }
+      /* Decorative elements collide with content when the pane is short. */
+      .hero-accent, .hero-watermark { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1007,7 +1021,29 @@
   // Hero video crossfade
   (function() {
     const videos = document.querySelectorAll('.hero-video');
-    if (videos.length < 2) return;
+    if (!videos.length) return;
+
+    // Safari/iOS ignore the bare `autoplay` attribute for inline video; force muted
+    // and start playback via play() (whose promise we always catch), with a
+    // tap-to-start fallback for when autoplay is blocked (e.g. Low Power Mode).
+    const safePlay = function(v) {
+      v.muted = true;
+      const p = v.play();
+      if (p && typeof p.catch === 'function') p.catch(function() {});
+    };
+
+    safePlay(videos[0]);
+
+    if (videos.length < 2) {
+      const resumeSingle = function() { if (videos[0].paused) safePlay(videos[0]); cleanup(); };
+      function cleanup() {
+        window.removeEventListener('touchstart', resumeSingle);
+        window.removeEventListener('click', resumeSingle);
+      }
+      window.addEventListener('touchstart', resumeSingle, { passive: true });
+      window.addEventListener('click', resumeSingle);
+      return;
+    }
 
     // Pause second video until needed
     videos[1].pause();
@@ -1023,7 +1059,7 @@
       if (this.currentTime >= 6) {
         this.pause();
         videos[1].currentTime = 1;
-        videos[1].play();
+        safePlay(videos[1]);
         switchTo(1);
       }
     });
@@ -1033,10 +1069,19 @@
       if (this.currentTime >= this.duration - 0.3) {
         this.pause();
         videos[0].currentTime = 0;
-        videos[0].play();
+        safePlay(videos[0]);
         switchTo(0);
       }
     });
+
+    // Fallback: if autoplay was blocked, start on the first user interaction.
+    const resume = function() {
+      if (videos[0].paused && videos[1].paused) safePlay(videos[0]);
+      window.removeEventListener('touchstart', resume);
+      window.removeEventListener('click', resume);
+    };
+    window.addEventListener('touchstart', resume, { passive: true });
+    window.addEventListener('click', resume);
   })();
   </script>
 </body>

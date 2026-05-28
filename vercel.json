@@ -3,5 +3,8 @@
   "installCommand": "",
   "outputDirectory": ".",
   "framework": null,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/apply", "destination": "/admissions#apply", "permanent": false }
+  ]
 }

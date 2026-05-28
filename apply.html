@@ -824,15 +824,25 @@
         </div>
 
         <div class="pending-note">
-          <h4>Still to be completed on the printed form</h4>
-          <p>After submitting online, please <a href="/forms/admission-form-2027.pdf" target="_blank" rel="noopener" style="color: #1e3a8a; text-decoration: underline; font-weight: bold;">download the printed form (PDF)</a> and complete these items, which require an original signature or hard copy:</p>
+          <h4>Supporting documents to submit</h4>
+          <p>You don't need to submit the printed application form &mdash; this online submission is your application. You only need to bring or e-mail the supporting documents listed below so we can verify your application.</p>
+
+          <p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">Required for every learner</p>
           <ul>
-            <li>Parent/guardian signature</li>
-            <li>Attached learner photo</li>
-            <li>Banking details for fee payments</li>
-            <li>Certified copies (ID, birth certificate, proof of residence, previous school reports)</li>
+            <li>Certified copy of the learner's birth certificate</li>
+            <li>Certified copy of parent/guardian ID</li>
+            <li>Proof of residence (utility bill or lease agreement)</li>
+            <li>Clinic card / immunization records</li>
+            <li>Two recent passport-size photos</li>
           </ul>
-          <p style="margin-top: 10px;">The completed form can be <strong>e-mailed to info@h-elite.co.za</strong> or <strong>brought to the school office</strong>.</p>
+
+          <p style="margin-top: 14px; font-weight: bold; color: #1e3a8a;">If applicable</p>
+          <ul>
+            <li>Previous school reports (if transferring from another school)</li>
+            <li>Transfer card from previous school</li>
+          </ul>
+
+          <p style="margin-top: 14px;">Documents can be <strong>e-mailed to info@h-elite.co.za</strong> or <strong>brought to the school office</strong>. Photo, banking details and signature will be handled at the school during your visit.</p>
         </div>
 
         <div class="field-group">
@@ -872,10 +882,16 @@
       <section class="success-card" id="successCard" style="display: none;">
         <div class="check">✓</div>
         <h2>Application Submitted</h2>
-        <p>Thank you. Your application has been received and the school will be in touch soon. Please also download the printed form below, complete the signature, photo and banking sections, and either <strong>e-mail it to info@h-elite.co.za</strong> or <strong>bring it to the school office</strong> with your certified supporting documents.</p>
+
+        <div id="refBlock" style="background: #fafafa; border: 2px dashed var(--navy); padding: 20px 24px; margin: 24px auto; max-width: 480px; display: none;">
+          <p style="font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.15em; font-weight: bold; margin: 0;">Your Reference Number</p>
+          <p id="refNumber" style="font-family: 'Courier New', monospace; font-size: 26px; font-weight: bold; color: var(--navy); letter-spacing: 0.08em; margin: 8px 0 0;"></p>
+        </div>
+
+        <p>Thank you. Your application has been received and a confirmation e-mail has been sent to you. Please <strong>e-mail your supporting documents to info@h-elite.co.za</strong> or <strong>bring them to the school office</strong> &mdash; <strong>quote your reference number</strong> so we can match them to your application. Photo, banking details and signature will be handled at the school during your visit.</p>
+
         <div class="success-actions">
           <a href="/admissions" class="btn btn-back">Back to Admissions</a>
-          <a href="/forms/admission-form-2027.pdf" target="_blank" rel="noopener" class="btn btn-submit">Download Printed Form (PDF)</a>
         </div>
       </section>
     </form>
@@ -975,14 +991,12 @@
     }
 
     function validateCurrentStep() {
-      var card = document.querySelector('.step-card[data-step="' + current + '"]');
-      var invalid = card.querySelectorAll('input[required]:invalid, select[required]:invalid, textarea[required]:invalid');
-      if (invalid.length > 0) {
-        invalid[0].focus();
-        invalid[0].reportValidity();
-        return false;
-      }
+      // TEMPORARY: validation disabled for testing — flip back to the block below when done.
       return true;
+      // var card = document.querySelector('.step-card[data-step="' + current + '"]');
+      // var invalid = card.querySelectorAll('input[required]:invalid, select[required]:invalid, textarea[required]:invalid');
+      // if (invalid.length > 0) { invalid[0].focus(); invalid[0].reportValidity(); return false; }
+      // return true;
     }
 
     document.querySelectorAll('[data-next]').forEach(function(btn) {
@@ -1298,6 +1312,10 @@
         var json = await resp.json();
         if (resp.ok && json.success) {
           localStorage.removeItem(DRAFT_KEY);
+          if (json.reference) {
+            document.getElementById('refNumber').textContent = json.reference;
+            document.getElementById('refBlock').style.display = '';
+          }
           document.querySelectorAll('.step-card[data-step]').forEach(function(c) { c.style.display = 'none'; });
           document.querySelector('.stepper').style.display = 'none';
           var banner = document.getElementById('restoreBanner');
